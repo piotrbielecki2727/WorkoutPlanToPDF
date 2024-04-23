@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaCalendarPlus } from "react-icons/fa";
+import { FaCalendarPlus, FaTrash } from "react-icons/fa";
 import './WorkoutPlanPage.css';
 import '../Components/CustomButton.css';
 import { CustomModal } from '../Components/CustomModal';
@@ -11,6 +11,7 @@ import { CustomButton } from '../Components/CustomButton';
 
 
 import { handleCloseModal, handleOpenModal, handleResetState } from '../Utils/WorkoutPlanPageUtils';
+import { Text } from '@chakra-ui/react';
 
 
 export const WorkoutPlanPage: React.FC = () => {
@@ -18,24 +19,25 @@ export const WorkoutPlanPage: React.FC = () => {
     const [isWorkoutPlanCreated, setIsWorkoutPlanCreated] = useState(false);
     const dispatch = useDispatch();
 
- 
+
     return (
-        <div className='MainPage'>
+        <div >
             {!isWorkoutPlanCreated ? (
                 <CustomModal
-                isOpen={isModalOpen}
-                onOpenModal={() => handleOpenModal(setIsModalOpen)}
-                onClose={() => handleCloseModal(setIsModalOpen, setIsWorkoutPlanCreated)}
-                ModalBodyContent={<WorkoutPlanForm onCloseModal={() => handleCloseModal(setIsModalOpen, setIsWorkoutPlanCreated)} />}
-                HeaderText='Enter workout plan details...'
-                leftIcon={FaCalendarPlus}
+                    isOpen={isModalOpen}
+                    onOpenModal={() => handleOpenModal(setIsModalOpen)}
+                    onClose={() => handleCloseModal(setIsModalOpen, setIsWorkoutPlanCreated)}
+                    ModalBodyContent={<WorkoutPlanForm isWorkoutPlanCreated={isWorkoutPlanCreated} setIsWorkoutPlanCreated={setIsWorkoutPlanCreated} onCloseModal={() => handleCloseModal(setIsModalOpen, setIsWorkoutPlanCreated)} />}
+                    HeaderText='Enter workout plan details...'
+                    leftIcon={FaCalendarPlus}
                 />) : (
 
-                    <CustomButton className='ButtonStyle' buttonText='Usun trening' onClick={() => handleResetState(setIsWorkoutPlanCreated, dispatch, resetState)}></CustomButton>
+                <CustomButton size='lg' leftIcon={FaTrash} className='ButtonStyle' buttonText='Delete training plan' onClick={() => handleResetState(setIsWorkoutPlanCreated, dispatch, resetState)}></CustomButton>
 
             )}
 
-            <DisplayWorkoutPlan />
+
+            <DisplayWorkoutPlan isWorkoutPlanCreated={isWorkoutPlanCreated} />
         </div>
     )
 }

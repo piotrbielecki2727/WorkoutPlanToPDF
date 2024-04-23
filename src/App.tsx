@@ -1,10 +1,12 @@
-import React from 'react';
+
+import MainPage from './Components/MainPage';
 import { WorkoutPlanPage } from './Pages/WorkoutPlanPage';
 
 function App() {
   return (
-
-    <WorkoutPlanPage />
+    <>
+      <MainPage children={<WorkoutPlanPage />} />
+    </>
   );
 }
 

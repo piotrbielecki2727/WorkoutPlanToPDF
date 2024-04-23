@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Icon, IconProps } from '@chakra-ui/react';
+import { Button, Icon, IconProps, Text } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 
 type Props = {
@@ -20,7 +20,7 @@ export const CustomButton: React.FC<Props> = ({ className, onClick, buttonText, 
     return (
         <>
             <Button colorScheme='none' variant={variant} className={className} onClick={onClick} size={size} leftIcon={leftIcon ? <Icon as={LeftIcon} /> : undefined}>
-                {buttonText}
+                <Text>{buttonText}</Text>
             </Button>
         </>
     )

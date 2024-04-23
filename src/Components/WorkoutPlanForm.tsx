@@ -1,5 +1,5 @@
 import { FormControl, FormErrorMessage, FormLabel, Input, useDisclosure } from "@chakra-ui/react"
-import { useState } from "react"
+import React, { useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { Errors } from "../Types"
 import { CustomButton } from "./CustomButton";
@@ -11,12 +11,14 @@ import { StateFromReducersMapObject } from "@reduxjs/toolkit";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
+    setIsWorkoutPlanCreated: React.Dispatch<React.SetStateAction<boolean>>;
+    isWorkoutPlanCreated: boolean;
 };
 
 
 
 
-export const WorkoutPlanForm: React.FC<Props> = ({ workoutPlan, updateWorkoutPlan, onCloseModal }) => {
+export const WorkoutPlanForm: React.FC<Props> = ({isWorkoutPlanCreated, setIsWorkoutPlanCreated, workoutPlan, updateWorkoutPlan, onCloseModal }) => {
     const dispatch = useDispatch();
 
     const [errors, setErrors] = useState<Errors>({
@@ -40,6 +42,7 @@ export const WorkoutPlanForm: React.FC<Props> = ({ workoutPlan, updateWorkoutPla
         } else {
             setErrors({ NameError: '', PersonError: '', AuthorError: '' });
             dispatch(updateWorkoutPlan(workoutPlan))
+            setIsWorkoutPlanCreated(true);
             onCloseModal();
 
         }

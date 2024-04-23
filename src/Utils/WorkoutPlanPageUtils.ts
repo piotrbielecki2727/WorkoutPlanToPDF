@@ -1,6 +1,5 @@
 export const handleCloseModal = (setIsModalOpen: Function, setIsWorkoutPlanCreated: Function) => {
     setIsModalOpen(false);
-    setIsWorkoutPlanCreated(true);
 };
 
 export const handleOpenModal = (setIsModalOpen: Function) => {
