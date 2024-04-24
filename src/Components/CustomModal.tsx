@@ -22,14 +22,16 @@ type Props = {
     ModalHeaderStyle?: string,
     ModalBodyStyle?: string,
     leftIcon?: IconType,
+    mt?: number,
+    buttonText?: string,
 }
 
 
-export const CustomModal: React.FC<Props> = ({ onOpenModal, isOpen, onClose, ModalBodyContent, HeaderText, ModalStyle, ModalHeaderStyle, ModalBodyStyle, leftIcon }) => {
+export const CustomModal: React.FC<Props> = ({ mt, buttonText, onOpenModal, isOpen, onClose, ModalBodyContent, HeaderText, ModalStyle, ModalHeaderStyle, ModalBodyStyle, leftIcon }) => {
 
     return (
         <>
-            <CustomButton onClick={onOpenModal} className='ButtonStyle' buttonText='Create workout plan' leftIcon={leftIcon} size='lg' />
+            <CustomButton mt={mt} onClick={onOpenModal} className='ButtonStyle' buttonText={buttonText} leftIcon={leftIcon} size='lg' />
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>

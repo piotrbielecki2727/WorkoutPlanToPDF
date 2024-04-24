@@ -1,4 +1,4 @@
-export const handleCloseModal = (setIsModalOpen: Function, setIsWorkoutPlanCreated: Function) => {
+export const handleCloseModal = (setIsModalOpen: Function) => {
     setIsModalOpen(false);
 };
 
@@ -6,7 +6,7 @@ export const handleOpenModal = (setIsModalOpen: Function) => {
     setIsModalOpen(true);
 };
 
-export const handleResetState = (setIsWorkoutPlanCreated: Function, dispatch: Function, resetState: Function) => {
-    setIsWorkoutPlanCreated(false);
+export const handleResetState = (dispatch: Function, resetState: Function, resetWorkoutPlanStates: Function) => {
+    dispatch(resetWorkoutPlanStates());
     dispatch(resetState());
 };

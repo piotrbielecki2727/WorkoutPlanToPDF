@@ -1,24 +1,24 @@
 import { FormControl, FormErrorMessage, FormLabel, Input, useDisclosure } from "@chakra-ui/react"
 import React, { useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
-import { Errors } from "../Types"
+import { Errors, WorkoutPlanStatesTypes } from "../Types"
 import { CustomButton } from "./CustomButton";
 import { FaSave } from "react-icons/fa";
 import { ValidateWorkoutPlanForm } from "../Utils/ValidateWorkoutPlanForm";
 import { updateWorkoutPlan } from "../State/WorkoutPlan/workoutPlanSlice";
 import { RootState } from "../State/store";
 import { StateFromReducersMapObject } from "@reduxjs/toolkit";
+import workoutPlanStatesSlice, { updateWorkoutPlanStates } from "../State/WorkoutPlan/workoutPlanStatesSlice";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
-    setIsWorkoutPlanCreated: React.Dispatch<React.SetStateAction<boolean>>;
-    isWorkoutPlanCreated: boolean;
+
 };
 
 
 
 
-export const WorkoutPlanForm: React.FC<Props> = ({isWorkoutPlanCreated, setIsWorkoutPlanCreated, workoutPlan, updateWorkoutPlan, onCloseModal }) => {
+export const WorkoutPlanForm: React.FC<Props> = ({ workoutPlan, updateWorkoutPlan, onCloseModal, workoutPlanStates, updateWorkoutPlanStates }) => {
     const dispatch = useDispatch();
 
     const [errors, setErrors] = useState<Errors>({
@@ -41,8 +41,12 @@ export const WorkoutPlanForm: React.FC<Props> = ({isWorkoutPlanCreated, setIsWor
             setErrors(validationErrors);
         } else {
             setErrors({ NameError: '', PersonError: '', AuthorError: '' });
-            dispatch(updateWorkoutPlan(workoutPlan))
-            setIsWorkoutPlanCreated(true);
+            const updatedWorkoutPlanStates: WorkoutPlanStatesTypes = {
+                ...workoutPlanStates,
+                isWorkoutPlanCreated: true,
+            }
+            dispatch(updateWorkoutPlan(workoutPlan));
+            dispatch(updateWorkoutPlanStates(updatedWorkoutPlanStates));
             onCloseModal();
 
         }
@@ -81,10 +85,12 @@ export const WorkoutPlanForm: React.FC<Props> = ({isWorkoutPlanCreated, setIsWor
 
 const mapStateToProps = (state: RootState) => ({
     workoutPlan: state.workoutPlan.workoutPlan,
+    workoutPlanStates: state.workoutPlanStates.workoutPlanStates,
 });
 
 const mapDispatchToProps = {
     updateWorkoutPlan,
+    updateWorkoutPlanStates
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

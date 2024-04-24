@@ -30,3 +30,12 @@ export type Errors = {
     PersonError: string;
     AuthorError: string;
 }
+
+export type WorkoutErrors = {
+    NameError: string;
+}
+
+export type WorkoutPlanStatesTypes = {
+    isWorkoutPlanCreated: boolean,
+    doWorkoutsExist: boolean,
+}

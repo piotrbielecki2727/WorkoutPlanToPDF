@@ -27,7 +27,7 @@ import {
 import { IconType } from 'react-icons';
 
 import logo from '../Assets/logoNew.png'
-import { WorkoutPlanPage } from '../Pages/WorkoutPlanPage';
+import { DisplaySideBarContent } from './DisplaySideBarContent';
 
 
 export default function MainPage({ children }: { children: ReactNode }) {
@@ -37,8 +37,8 @@ export default function MainPage({ children }: { children: ReactNode }) {
             <SidebarContent
                 onClose={() => onClose}
                 display={{ base: 'none', md: 'block' }}
-                bg='black'
-                borderRight='1px solid black'
+                bg='white'
+                borderRight='1px solid #363636'
             />
             <Drawer
                 autoFocus={false}
@@ -52,6 +52,8 @@ export default function MainPage({ children }: { children: ReactNode }) {
                 <DrawerContent
                 >
                     <SidebarContent onClose={onClose} />
+
+
                 </DrawerContent>
             </Drawer>
             <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
@@ -71,7 +73,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     return (
         <Box
             bg='white'
-            w={{ base: 'full', md: 60 }}
+            w={{ base: 'full', md: 60, xl: '275px' }}
             pos="fixed"
             h="full"
             {...rest}>
@@ -92,8 +94,11 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                     <CloseButton display={{ base: 'flex', md: 'none' }} ml={3} color='white' onClick={onClose} />
 
                 </Box>
+
             </Flex>
-            <WorkoutPlanPage />
+                    <DisplaySideBarContent />
+
+                
         </Box>
     );
 };

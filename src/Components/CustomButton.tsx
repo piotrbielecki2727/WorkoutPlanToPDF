@@ -9,17 +9,18 @@ type Props = {
     size?: string;
     leftIcon?: IconType;
     variant?: string,
+    mt?: number,
 
 }
 
 
 
-export const CustomButton: React.FC<Props> = ({ className, onClick, buttonText, size, leftIcon, variant }) => {
+export const CustomButton: React.FC<Props> = ({ mt, className, onClick, buttonText, size, leftIcon, variant }) => {
     const LeftIcon = leftIcon;
 
     return (
         <>
-            <Button colorScheme='none' variant={variant} className={className} onClick={onClick} size={size} leftIcon={leftIcon ? <Icon as={LeftIcon} /> : undefined}>
+            <Button mt={mt} colorScheme='none' variant={variant} className={className} onClick={onClick} size={size} leftIcon={leftIcon ? <Icon as={LeftIcon} /> : undefined}>
                 <Text>{buttonText}</Text>
             </Button>
         </>

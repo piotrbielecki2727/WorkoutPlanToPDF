@@ -22,7 +22,7 @@ const workoutPlanSlice = createSlice({
         updateWorkoutPlan(state, action: PayloadAction<WorkoutPlan>) {
             state.workoutPlan = action.payload;
         },
-        resetState: state => initialState
+        resetState: state => initialState,
     },
 })
 
