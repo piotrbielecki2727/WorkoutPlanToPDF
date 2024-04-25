@@ -7,6 +7,7 @@ export type Set = {
 }
 
 export type Exercise = {
+    Id: number,
     Name: string,
     Muscle: string,
     Sets: Set[];
@@ -14,6 +15,7 @@ export type Exercise = {
 
 
 export type Workout = {
+    Id: number,
     Name: string,
     Exercises: Exercise[];
 }
@@ -38,4 +40,5 @@ export type WorkoutErrors = {
 export type WorkoutPlanStatesTypes = {
     isWorkoutPlanCreated: boolean,
     doWorkoutsExist: boolean,
+    CurrentWorkoutId: number,
 }

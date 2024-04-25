@@ -4,30 +4,24 @@ import {
     Box,
     CloseButton,
     Flex,
-    Icon,
-    useColorModeValue,
-    Link,
     Drawer,
     DrawerContent,
-    Text,
     useDisclosure,
     BoxProps,
     FlexProps,
     Image,
-    Spacer,
 } from '@chakra-ui/react';
 import {
-    FiHome,
-    FiTrendingUp,
-    FiCompass,
-    FiStar,
-    FiSettings,
+
     FiMenu,
 } from 'react-icons/fi';
-import { IconType } from 'react-icons';
 
-import logo from '../Assets/logoNew.png'
+
+import logo from '../Assets/logoNew.png';
+import background from '../Assets/background.jpeg';
+
 import { DisplaySideBarContent } from './DisplaySideBarContent';
+import { DisplayCurrentWorkout } from './DisplayCurrentWorkout';
 
 
 export default function MainPage({ children }: { children: ReactNode }) {
@@ -57,9 +51,9 @@ export default function MainPage({ children }: { children: ReactNode }) {
                 </DrawerContent>
             </Drawer>
             <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
-            <Box ml={{ base: 0, md: 60 }} p="4">
-                {children}
 
+            <Box ml={{ base: '0px', md: '275px', lg: '275px', xl: '275px' }}>
+                <DisplayCurrentWorkout />
             </Box>
         </Box>
     );
@@ -73,7 +67,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     return (
         <Box
             bg='white'
-            w={{ base: 'full', md: 60, xl: '275px' }}
+            w={{ base: 'full', md: '275px', xl: '275px' }}
             pos="fixed"
             h="full"
             {...rest}>
@@ -86,7 +80,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                 <Box w='20%' color='white'>
 
                 </Box>
-                <Box w={{ base: '230px', sm: '300px', xl: '600px' }} color='white'>
+                <Box w={{ base: '400px' }} color='white'>
                     <Image src={logo} />
 
                 </Box>
@@ -96,9 +90,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                 </Box>
 
             </Flex>
-                    <DisplaySideBarContent />
+            <DisplaySideBarContent />
 
-                
+
         </Box>
     );
 };

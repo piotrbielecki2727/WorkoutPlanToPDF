@@ -11,6 +11,7 @@ const initialState: WorkoutPlanStates = {
     workoutPlanStates: {
         isWorkoutPlanCreated: false,
         doWorkoutsExist: false,
+        CurrentWorkoutId: 0,
     }
 }
 

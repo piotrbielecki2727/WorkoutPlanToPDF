@@ -19,6 +19,8 @@ export const NewWorkoutForm: React.FC<Props> = ({ onCloseModal, workoutPlan, wor
     const dispatch = useDispatch();
     const [workoutName, setWorkoutName] = useState('');
 
+
+
     const [errors, setErrors] = useState<WorkoutErrors>({
         NameError: '',
     });
@@ -35,7 +37,16 @@ export const NewWorkoutForm: React.FC<Props> = ({ onCloseModal, workoutPlan, wor
         else {
             setErrors({ NameError: '' })
 
+            let newId = 1;
+            if (workoutPlan.Workouts.length > 0) {
+                const lastId = workoutPlan.Workouts[workoutPlan.Workouts.length - 1].Id;
+                if (lastId !== null && typeof lastId === 'number') {
+                    newId = lastId + 1;
+                }
+            }
+
             const newWorkout: Workout = {
+                Id: newId,
                 Name: workoutName,
                 Exercises: [],
             };
@@ -44,6 +55,7 @@ export const NewWorkoutForm: React.FC<Props> = ({ onCloseModal, workoutPlan, wor
                 ...workoutPlan,
                 Workouts: [...workoutPlan.Workouts, newWorkout],
             }));
+
 
             dispatch(updateWorkoutPlanStates({ ...workoutPlanStates, doWorkoutsExist: true }))
 
@@ -56,7 +68,7 @@ export const NewWorkoutForm: React.FC<Props> = ({ onCloseModal, workoutPlan, wor
 
 
     return (
-        <form onSubmit={handleSubmitForm}>
+        <form>
             <FormControl isInvalid={!!errors.NameError}>
                 <FormLabel>Workout name: </FormLabel>
                 <Input name="Name" required type='text' value={workoutName} onChange={handleInputChange} />

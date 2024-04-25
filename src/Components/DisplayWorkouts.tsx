@@ -1,11 +1,11 @@
-import { Table, TableContainer, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, IconButton, Flex, Text, Card, CardHeader } from "@chakra-ui/react"
-import { CustomButton } from "./CustomButton"
+import { Table, TableContainer, Thead, Tr, Th, Tbody, Td, IconButton, Flex, Card, CardHeader } from "@chakra-ui/react"
 import './DisplayWorkouts.css';
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { CardBody } from "react-bootstrap";
 import { WorkoutPlan } from "../Types";
-import { useSelector } from "react-redux";
-import { RootState } from "../State/store";
+import { useDispatch, useSelector } from "react-redux";
+import { updateWorkoutPlanStates } from "../State/WorkoutPlan/workoutPlanStatesSlice";
+
 
 
 interface DisplayWorkoutsProps {
@@ -14,7 +14,16 @@ interface DisplayWorkoutsProps {
 
 export const DisplayWorkouts: React.FC<DisplayWorkoutsProps> = ({ workoutPlan }) => {
 
+    const dispatch = useDispatch();
 
+
+    const setCurrentWorkoutId = (id: number) => {
+        dispatch(updateWorkoutPlanStates({
+            CurrentWorkoutId: id,
+            isWorkoutPlanCreated: true,
+            doWorkoutsExist: true
+        }))
+    }
 
     return (
         <>
@@ -32,13 +41,13 @@ export const DisplayWorkouts: React.FC<DisplayWorkoutsProps> = ({ workoutPlan })
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {workoutPlan.Workouts.map((workout, index) => (
-                                    <Tr key={index}>
+                                {workoutPlan.Workouts.map((workout) => (
+                                    <Tr key={workout.Id}>
                                         <Td maxW={100} textAlign='center' whiteSpace="nowrap" overflow="hidden" textOverflow="ellipsis">{workout.Name}</Td>
                                         <Td maxW={100} textAlign='center'>
                                             <Flex justifyContent='center' gap={1} alignItems='center'>
                                                 <IconButton textAlign='center' size='sm' className="ActionButton" icon={<FaTrash size='20px' />} aria-label="xdd" />
-                                                <IconButton textAlign='center' size='sm' className="ActionButton" icon={<FaEdit size='20px' style={{ marginLeft: '4px' }} />} aria-label="xdd" />
+                                                <IconButton onClick={() => setCurrentWorkoutId(workout.Id)} textAlign='center' size='sm' className="ActionButton" icon={<FaEdit size='20px' style={{ marginLeft: '4px' }} />} aria-label="xdd" />
                                             </Flex>
                                         </Td>
                                     </Tr>
@@ -53,4 +62,8 @@ export const DisplayWorkouts: React.FC<DisplayWorkoutsProps> = ({ workoutPlan })
     )
 }
 
+
+function dispatch(arg0: { payload: import("../Types").WorkoutPlanStatesTypes; type: "workoutPlanStates/updateWorkoutPlanStates"; }) {
+    throw new Error("Function not implemented.");
+}
 

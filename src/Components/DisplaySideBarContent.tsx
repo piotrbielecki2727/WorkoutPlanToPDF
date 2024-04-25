@@ -16,7 +16,7 @@ import { WorkoutPlan, WorkoutPlanStatesTypes } from '../Types';
 import { RootState } from '../State/store';
 
 
-export const DisplaySideBarContent: React.FC = () => {
+export const DisplaySideBarContent: React.FC = ({}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dispatch = useDispatch();
     const workoutPlan: WorkoutPlan = useSelector((state: RootState) => state.workoutPlan.workoutPlan);
@@ -54,13 +54,15 @@ export const DisplaySideBarContent: React.FC = () => {
                             isOpen={isModalOpen}
                             onOpenModal={() => handleOpenModal(setIsModalOpen)}
                             onClose={() => handleCloseModal(setIsModalOpen)}
-                            ModalBodyContent={<NewWorkoutForm onCloseModal={() => handleCloseModal(setIsModalOpen)} />}
+                            ModalBodyContent={<NewWorkoutForm  onCloseModal={() => handleCloseModal(setIsModalOpen)} />}
                             HeaderText='Enter workout name'
                             leftIcon={FaPlus}
                             buttonText='Add workout to current plan'
                         />
 
-                        {!workoutPlanStates.doWorkoutsExist ? (<></>) : (<> <DisplayWorkouts workoutPlan={workoutPlan} /></>)}
+                        {!workoutPlanStates.doWorkoutsExist ? (<></>) : (<>
+
+                            <DisplayWorkouts workoutPlan={workoutPlan} /></>)}
 
                     </>
 

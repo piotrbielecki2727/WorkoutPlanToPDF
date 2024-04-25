@@ -1,8 +1,5 @@
 import { WorkoutPlan, WorkoutPlanStatesTypes } from "../Types"
-import { useSelector } from "react-redux";
-import { RootState } from "../State/store";
 import { Box, Card, CardBody, CardHeader, Heading, Stack, StackDivider, Text } from "@chakra-ui/react";
-import { IoExit, IoMenu } from "react-icons/io5";
 
 interface DisplayWorkoutPlanProps {
     workoutPlan: WorkoutPlan;
