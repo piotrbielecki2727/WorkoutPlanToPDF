@@ -2,9 +2,9 @@ import { Table, TableContainer, Thead, Tr, Th, Tbody, Td, IconButton, Flex, Card
 import './DisplayWorkouts.css';
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { CardBody } from "react-bootstrap";
-import { WorkoutPlan } from "../Types";
+import { WorkoutPlan } from "../../Types";
 import { useDispatch, useSelector } from "react-redux";
-import { updateWorkoutPlanStates } from "../State/WorkoutPlan/workoutPlanStatesSlice";
+import { updateWorkoutPlanStates } from "../../State/WorkoutPlan/workoutPlanStatesSlice";
 
 
 
@@ -63,7 +63,7 @@ export const DisplayWorkouts: React.FC<DisplayWorkoutsProps> = ({ workoutPlan })
 }
 
 
-function dispatch(arg0: { payload: import("../Types").WorkoutPlanStatesTypes; type: "workoutPlanStates/updateWorkoutPlanStates"; }) {
+function dispatch(arg0: { payload: import("../../Types").WorkoutPlanStatesTypes; type: "workoutPlanStates/updateWorkoutPlanStates"; }) {
     throw new Error("Function not implemented.");
 }
 

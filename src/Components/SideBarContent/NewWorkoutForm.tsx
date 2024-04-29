@@ -1,19 +1,17 @@
-import { FormControl, FormErrorMessage, FormLabel, Input, useDisclosure } from "@chakra-ui/react"
+import { FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react"
 import React, { useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
-import { WorkoutErrors, WorkoutPlan, Workout } from "../Types"
-import { CustomButton } from "./CustomButton";
+import { WorkoutErrors, Workout } from "../../Types"
+import { CustomButton } from "../CustomComponents/CustomButton";
 import { FaSave } from "react-icons/fa";
-import { updateWorkoutPlan } from "../State/WorkoutPlan/workoutPlanSlice";
-import { RootState } from "../State/store";
-import workoutPlanStatesSlice, { updateWorkoutPlanStates } from "../State/WorkoutPlan/workoutPlanStatesSlice";
+import { updateWorkoutPlan } from "../../State/WorkoutPlan/workoutPlanSlice";
+import { RootState } from "../../State/store";
+import { updateWorkoutPlanStates } from "../../State/WorkoutPlan/workoutPlanStatesSlice";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
 
 };
-
-
 
 export const NewWorkoutForm: React.FC<Props> = ({ onCloseModal, workoutPlan, workoutPlanStates, updateWorkoutPlanStates }) => {
     const dispatch = useDispatch();

@@ -1,35 +1,30 @@
 import React, { useState } from 'react'
-import { FaCalendarPlus, FaCreativeCommons, FaDownload, FaPlus, FaTrash, FaUpload } from "react-icons/fa";
-import { CustomModal } from './CustomModal';
+import { FaCalendarPlus, FaDownload, FaPlus, FaTrash, FaUpload } from "react-icons/fa";
+import { CustomModal } from '../CustomComponents/CustomModal';
 import { DisplayWorkoutPlan } from './DisplayWorkoutPlan';
-import WorkoutPlanForm from './WorkoutPlanForm';
-import { useDispatch, useSelector } from 'react-redux';
-import { resetState } from '../State/WorkoutPlan/workoutPlanSlice';
-import { resetWorkoutPlanStates } from '../State/WorkoutPlan/workoutPlanStatesSlice';
-import { CustomButton } from './CustomButton';
-import { handleCloseModal, handleOpenModal, handleResetState } from '../Utils/WorkoutPlanPageUtils';
-import { Box, Flex, Text } from '@chakra-ui/react';
-import '../Components/CustomButton.css';
+import WorkoutPlanForm from './NewWorkoutPlanForm';
+import { useDispatch } from 'react-redux';
+import { resetState } from '../../State/WorkoutPlan/workoutPlanSlice';
+import { resetWorkoutPlanStates } from '../../State/WorkoutPlan/workoutPlanStatesSlice';
+import { CustomButton } from '../CustomComponents/CustomButton';
+import { handleCloseModal, handleOpenModal, handleResetState } from '../../Utils/SideBarContentUtils/WorkoutPlanPageUtils';
+import { Box, Flex } from '@chakra-ui/react';
+import '../CustomComponents/CustomButton.css';
 import { DisplayWorkouts } from './DisplayWorkouts';
 import NewWorkoutForm from './NewWorkoutForm';
-import { WorkoutPlan, WorkoutPlanStatesTypes } from '../Types';
-import { RootState } from '../State/store';
+import { useWorkoutPlanSelector } from '../../Hooks/useWorkoutPlanSelector';
+import { useWorkoutPlanStatesSelector } from '../../Hooks/useWorkoutPlanStatesSelector';
 
 
-export const DisplaySideBarContent: React.FC = ({}) => {
+export const DisplaySideBarContent: React.FC = ({ }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dispatch = useDispatch();
-    const workoutPlan: WorkoutPlan = useSelector((state: RootState) => state.workoutPlan.workoutPlan);
-    const workoutPlanStates: WorkoutPlanStatesTypes = useSelector((state: RootState) => state.workoutPlanStates.workoutPlanStates);
-
-
-
+    const workoutPlan = useWorkoutPlanSelector();
+    const workoutPlanStates = useWorkoutPlanStatesSelector();
 
     return (
         <Box >
-
             <Flex justifyContent='center' alignItems='center' flexDirection='column'>
-
                 {!workoutPlanStates.isWorkoutPlanCreated ? (
                     <>
                         <CustomModal
@@ -54,7 +49,7 @@ export const DisplaySideBarContent: React.FC = ({}) => {
                             isOpen={isModalOpen}
                             onOpenModal={() => handleOpenModal(setIsModalOpen)}
                             onClose={() => handleCloseModal(setIsModalOpen)}
-                            ModalBodyContent={<NewWorkoutForm  onCloseModal={() => handleCloseModal(setIsModalOpen)} />}
+                            ModalBodyContent={<NewWorkoutForm onCloseModal={() => handleCloseModal(setIsModalOpen)} />}
                             HeaderText='Enter workout name'
                             leftIcon={FaPlus}
                             buttonText='Add workout to current plan'

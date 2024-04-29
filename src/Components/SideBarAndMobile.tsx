@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactText } from 'react';
+import { ReactNode } from 'react';
 import {
     IconButton,
     Box,
@@ -12,16 +12,12 @@ import {
     Image,
 } from '@chakra-ui/react';
 import {
-
     FiMenu,
 } from 'react-icons/fi';
-
-
 import logo from '../Assets/logoNew.png';
-import background from '../Assets/background.jpeg';
 
-import { DisplaySideBarContent } from './DisplaySideBarContent';
-import { DisplayCurrentWorkout } from './DisplayCurrentWorkout';
+import { DisplaySideBarContent } from './SideBarContent/DisplaySideBarContent';
+import { DisplayCurrentWorkout } from './CurrentWorkout/DisplayCurrentWorkout';
 
 
 export default function MainPage({ children }: { children: ReactNode }) {
@@ -90,6 +86,8 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                 </Box>
 
             </Flex>
+
+            
             <DisplaySideBarContent />
 
 

@@ -1,5 +1,5 @@
 
-import MainPage from './Components/MainPage';
+import MainPage from './Components/SideBarAndMobile';
 
 
 function App() {

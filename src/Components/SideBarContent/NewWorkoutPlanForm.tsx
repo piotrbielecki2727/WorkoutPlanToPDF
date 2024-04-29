@@ -1,14 +1,13 @@
-import { FormControl, FormErrorMessage, FormLabel, Input, useDisclosure } from "@chakra-ui/react"
+import { FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react"
 import React, { useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
-import { Errors, WorkoutPlanStatesTypes } from "../Types"
-import { CustomButton } from "./CustomButton";
+import { Errors, WorkoutPlanStatesTypes } from "../../Types"
+import { CustomButton } from "../CustomComponents/CustomButton";
 import { FaSave } from "react-icons/fa";
-import { ValidateWorkoutPlanForm } from "../Utils/ValidateWorkoutPlanForm";
-import { updateWorkoutPlan } from "../State/WorkoutPlan/workoutPlanSlice";
-import { RootState } from "../State/store";
-import { StateFromReducersMapObject } from "@reduxjs/toolkit";
-import workoutPlanStatesSlice, { updateWorkoutPlanStates } from "../State/WorkoutPlan/workoutPlanStatesSlice";
+import { ValidateWorkoutPlanForm } from "../../Utils/SideBarContentUtils/ValidateWorkoutPlanForm";
+import { updateWorkoutPlan } from "../../State/WorkoutPlan/workoutPlanSlice";
+import { RootState } from "../../State/store";
+import { updateWorkoutPlanStates } from "../../State/WorkoutPlan/workoutPlanStatesSlice";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
@@ -17,8 +16,7 @@ interface Props extends PropsFromRedux {
 
 
 
-
-export const WorkoutPlanForm: React.FC<Props> = ({ workoutPlan, updateWorkoutPlan, onCloseModal, workoutPlanStates, updateWorkoutPlanStates }) => {
+export const NewWorkoutPlanForm: React.FC<Props> = ({ workoutPlan, updateWorkoutPlan, onCloseModal, workoutPlanStates, updateWorkoutPlanStates }) => {
     const dispatch = useDispatch();
 
     const [errors, setErrors] = useState<Errors>({
@@ -95,4 +93,4 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
-export default connector(WorkoutPlanForm);
+export default connector(NewWorkoutPlanForm);

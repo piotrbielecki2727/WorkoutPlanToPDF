@@ -1,4 +1,4 @@
-import { Errors, WorkoutPlan } from "../Types";
+import { Errors, WorkoutPlan } from "../../Types";
 
 export const ValidateWorkoutPlanForm = (workoutPlan: WorkoutPlan): Errors | null => {
     const errors: Errors = {
