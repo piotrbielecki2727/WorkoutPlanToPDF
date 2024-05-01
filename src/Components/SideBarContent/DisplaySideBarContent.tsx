@@ -43,7 +43,7 @@ export const DisplaySideBarContent: React.FC = ({ }) => {
                     <>
                         <CustomButton mt={5} className='ButtonStyle' leftIcon={FaDownload} size='lg' buttonText='Convert workout plan to PDF' />
                         <CustomButton mt={5} size='lg' leftIcon={FaTrash} className='ButtonStyle' buttonText='Delete training plan' onClick={() => handleResetState(dispatch, resetState, resetWorkoutPlanStates)}></CustomButton>
-                        <DisplayWorkoutPlan workoutPlanStates={workoutPlanStates} workoutPlan={workoutPlan} />
+                        {/* <DisplayWorkoutPlan workoutPlanStates={workoutPlanStates} workoutPlan={workoutPlan} />*/}
 
                         <CustomModal
                             isOpen={isModalOpen}
@@ -53,11 +53,12 @@ export const DisplaySideBarContent: React.FC = ({ }) => {
                             HeaderText='Enter workout name'
                             leftIcon={FaPlus}
                             buttonText='Add workout to current plan'
+                            mt={5}
                         />
 
                         {!workoutPlanStates.doWorkoutsExist ? (<></>) : (<>
 
-                            <DisplayWorkouts workoutPlan={workoutPlan} /></>)}
+                            <DisplayWorkouts workoutPlanStates={workoutPlanStates} workoutPlan={workoutPlan} /></>)}
 
                     </>
 

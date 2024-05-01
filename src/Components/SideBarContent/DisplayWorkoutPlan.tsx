@@ -13,10 +13,10 @@ export const DisplayWorkoutPlan: React.FC<DisplayWorkoutPlanProps> = ({ workoutP
         <>
             {workoutPlanStates.isWorkoutPlanCreated ? (
                 <Card borderRadius={10} mt={5} mb={5} >
-                    <CardHeader borderTopRadius={10} bg={'black'} color={'white'}>
+                    <CardHeader p={4} borderTopRadius={10} bg={'black'} color={'white'}>
                         <Heading textAlign='center' fontSize='17.5'>Training plan details</Heading>
                     </CardHeader>
-                    <CardBody borderBottomRadius={10}>
+                    <CardBody pt={2} pb={2} borderBottomRadius={10}>
                         <Stack divider={<StackDivider />} spacing='2'>
                             <Box>
                                 <Heading textAlign='center' size='sm' >
@@ -45,7 +45,7 @@ export const DisplayWorkoutPlan: React.FC<DisplayWorkoutPlanProps> = ({ workoutP
                         </Stack>
                     </CardBody>
 
-                </Card>
+                </Card >
 
 
             ) : (<></>)

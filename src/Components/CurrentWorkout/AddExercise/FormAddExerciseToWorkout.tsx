@@ -1,17 +1,14 @@
-import { FormControl, FormErrorMessage, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select } from "@chakra-ui/react"
+import { FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select } from "@chakra-ui/react"
 import React, { useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { FaSave } from "react-icons/fa";
-import { Errors } from "../../../Types";
+import { Exercise } from "../../../Types";
 import { CustomButton } from "../../CustomComponents/CustomButton";
 import { RootState } from "../../../State/store";
 import { updateWorkoutPlan } from "../../../State/WorkoutPlan/workoutPlanSlice";
-import { updateWorkoutPlanStates } from "../../../State/WorkoutPlan/workoutPlanStatesSlice";
-import { updateExercise } from "../../../State/WorkoutPlan/exerciseSlice";
-import { updateWorkout } from "../../../State/WorkoutPlan/workoutSlice";
 import { findWorkout } from "../../../Utils/CurrentWorkoutUtils/findWorkout";
-import { useWorkoutPlanSelector } from "../../../Hooks/useWorkoutPlanSelector";
 import { useWorkoutPlanStatesSelector } from "../../../Hooks/useWorkoutPlanStatesSelector";
+import { FormExercise } from "./FormExercise";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
@@ -20,27 +17,41 @@ interface Props extends PropsFromRedux {
 
 
 
-export const FormAddExerciseToWorkout: React.FC<Props> = ({ onCloseModal, exercise, updateExercise, workout, updateWorkout }) => {
+export const FormAddExerciseToWorkout: React.FC<Props> = ({ onCloseModal, updateWorkoutPlan, workoutPlan }) => {
     const dispatch = useDispatch();
-    const workoutPlan = useWorkoutPlanSelector();
     const workoutPlanStates = useWorkoutPlanStatesSelector();
     const currentWorkout = findWorkout(workoutPlanStates.CurrentWorkoutId, workoutPlan);
 
-    const [errors, setErrors] = useState<Errors>({
-        NameError: '',
-        PersonError: '',
-        AuthorError: '',
-    });
+    const [exercise, setExercise] = useState<Exercise>({
+        Id: 0,
+        Name: '',
+        Muscle: '',
+        Sets: {
+            Sets: 0,
+            Reps: 0,
+            Weight: 0,
+            Rest: 0,
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        }
+    })
+
+    const handleInputExerciseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        updateExercise({ ...exercise, [name]: value });
-
+        setExercise({ ...exercise, [name]: value });
     }
 
+    const handleInputSetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setExercise(prevExercise => ({
+            ...prevExercise,
+            Sets: {
+                ...prevExercise.Sets,
+                [name]: parseFloat(value)
+            }
+        }));
+    };
 
     const handleSubmitForm = () => {
-        console.log(exercise);
         const updatedWorkoutList = workoutPlan.Workouts.map((w) => {
             if (w.Id === currentWorkout?.Id) {
                 return {
@@ -50,81 +61,33 @@ export const FormAddExerciseToWorkout: React.FC<Props> = ({ onCloseModal, exerci
             }
             return w;
         });
-    
+
         dispatch(updateWorkoutPlan({
             ...workoutPlan,
             Workouts: updatedWorkoutList,
         }));
-    
-        dispatch(updateExercise(exercise));
+
         onCloseModal();
     }
 
 
     return (
-        <form onSubmit={handleSubmitForm}>
-            <FormControl>
-                <FormLabel>Exercise: </FormLabel>
-                <Input name="Name" required type='text' value={exercise.Name} onChange={handleInputChange} />
-
-            </FormControl>
-
-            <FormControl >
-                <FormLabel>Muscle: </FormLabel>
-                <Input name="Muscle" required type='text' value={exercise.Muscle} onChange={handleInputChange} />
-
-            </FormControl>
-            {/*<FormControl isInvalid={!!errors.AuthorError}>
-                <FormLabel>Sets: </FormLabel>
-                <NumberInput min={1} defaultValue={1}>
-                    <NumberInputField />
-                    <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                    </NumberInputStepper>
-                </NumberInput>
-            </FormControl>
-
-            <FormControl isInvalid={!!errors.AuthorError}>
-                <FormLabel>Reps: </FormLabel>
-                <NumberInput defaultValue={5} min={1} max={150}>
-                    <NumberInputField />
-                    <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                    </NumberInputStepper>
-                </NumberInput>
-            </FormControl>
-
-            <FormControl isInvalid={!!errors.AuthorError}>
-                <FormLabel>Weight: </FormLabel>
-                <NumberInput defaultValue={0} min={0} >
-                    <NumberInputField />
-                    <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                    </NumberInputStepper>
-                </NumberInput>
-            </FormControl>
- */}
-
-
-            <CustomButton onClick={handleSubmitForm} className="ButtonStyle" size="lg" leftIcon={FaSave} buttonText="create workout"></CustomButton>
-
-
-        </form>
+        <FormExercise
+            exercise={exercise}
+            onExerciseChange={handleInputExerciseChange}
+            onSetChange={handleInputSetChange}
+            onFormSubmit={handleSubmitForm}
+        />
 
     )
 }
 
 const mapStateToProps = (state: RootState) => ({
-    exercise: state.exercise.exercise,
-    workout: state.workout.workout
+    workoutPlan: state.workoutPlan.workoutPlan,
 });
 
 const mapDispatchToProps = {
-    updateExercise,
-    updateWorkout
+    updateWorkoutPlan
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

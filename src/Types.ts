@@ -1,6 +1,5 @@
 export type Set = {
-    Id: number,
-    Number: number,
+    Sets: number,
     Reps: number,
     Weight: number,
     Rest: number,
@@ -10,7 +9,7 @@ export type Exercise = {
     Id: number,
     Name: string,
     Muscle: string,
-    Sets: Set[];
+    Sets: Set,
 }
 
 

@@ -17,7 +17,7 @@ import {
 import logo from '../Assets/logoNew.png';
 
 import { DisplaySideBarContent } from './SideBarContent/DisplaySideBarContent';
-import { DisplayCurrentWorkout } from './CurrentWorkout/DisplayCurrentWorkout';
+import { DisplayCurrentWorkout } from './CurrentWorkout/DisplayWorkout/DisplayCurrentWorkout';
 
 
 export default function MainPage({ children }: { children: ReactNode }) {
@@ -27,7 +27,7 @@ export default function MainPage({ children }: { children: ReactNode }) {
             <SidebarContent
                 onClose={() => onClose}
                 display={{ base: 'none', md: 'block' }}
-                bg='white'
+                bg='black'
                 borderRight='1px solid #363636'
             />
             <Drawer
@@ -48,7 +48,7 @@ export default function MainPage({ children }: { children: ReactNode }) {
             </Drawer>
             <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
 
-            <Box ml={{ base: '0px', md: '275px', lg: '275px', xl: '275px' }}>
+            <Box  ml={{ base: '0px', md: '275px', lg: '275px', xl: '275px' }}>
                 <DisplayCurrentWorkout />
             </Box>
         </Box>
@@ -72,11 +72,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                 h="20"
                 alignItems="center"
                 justifyContent="space-between"
+                borderBottom='1px solid #363636'
                 bg='black'>
                 <Box w='20%' color='white'>
 
                 </Box>
-                <Box w={{ base: '400px' }} color='white'>
+                <Box  w={{ base: '400px' }} color='white'>
                     <Image src={logo} />
 
                 </Box>
