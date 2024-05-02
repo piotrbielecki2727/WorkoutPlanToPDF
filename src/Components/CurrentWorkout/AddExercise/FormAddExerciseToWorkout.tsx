@@ -1,14 +1,11 @@
-import { FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select } from "@chakra-ui/react"
 import React, { useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
-import { FaSave } from "react-icons/fa";
-import { Exercise } from "../../../Types";
-import { CustomButton } from "../../CustomComponents/CustomButton";
 import { RootState } from "../../../State/store";
 import { updateWorkoutPlan } from "../../../State/WorkoutPlan/workoutPlanSlice";
 import { findWorkout } from "../../../Utils/CurrentWorkoutUtils/findWorkout";
 import { useWorkoutPlanStatesSelector } from "../../../Hooks/useWorkoutPlanStatesSelector";
 import { FormExercise } from "./FormExercise";
+import { Exercise } from "../../../Types";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
@@ -21,7 +18,7 @@ export const FormAddExerciseToWorkout: React.FC<Props> = ({ onCloseModal, update
     const dispatch = useDispatch();
     const workoutPlanStates = useWorkoutPlanStatesSelector();
     const currentWorkout = findWorkout(workoutPlanStates.CurrentWorkoutId, workoutPlan);
-
+    
     const [exercise, setExercise] = useState<Exercise>({
         Id: 0,
         Name: '',
