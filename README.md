@@ -1,5 +1,5 @@
-# WorkoutPlanToPDF 
-The "WorkoutPlanToPDF" is a web application designed to help users create personalized workout plans and generate PDF documents from them. Users can select exercises, specify sets and reps, and organize them into custom workout routines. 
+# WorkoutPlanner
+The "WorkoutPlanner" is a web application designed to help users create personalized workout plans and generate PDF documents from them. Users can select exercises, specify sets and reps, and organize them into custom workout routines. 
 
 # Features
 * Exercise Selection: Browse a library of exercises and choose the ones that best fit your training regimen.
@@ -9,6 +9,6 @@ The "WorkoutPlanToPDF" is a web application designed to help users create person
 * Responsive Design: Enjoy a seamless experience on desktop, tablet, and mobile devices, ensuring accessibility wherever you go.
 
 # Technologies
-* Frontend: React.js, Chakra UI, Redux
+* Frontend: Typescript, React, Chakra UI, Redux toolkit
 * PDF Generation: PDFKit
 
