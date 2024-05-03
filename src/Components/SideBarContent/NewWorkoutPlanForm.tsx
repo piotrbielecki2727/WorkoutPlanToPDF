@@ -1,4 +1,4 @@
-import { FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react"
+import { Box, FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react"
 import React, { useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { Errors, WorkoutPlanStatesTypes } from "../../Types"
@@ -51,33 +51,44 @@ export const NewWorkoutPlanForm: React.FC<Props> = ({ workoutPlan, updateWorkout
     };
 
     return (
-        <form onSubmit={handleSubmitForm}>
-            <FormControl isInvalid={!!errors.NameError}>
-                <FormLabel>Workout plan name: </FormLabel>
-                <Input name="Name" required type='text' value={workoutPlan.Name} onChange={handleInputChange} />
-                <FormErrorMessage>{errors.NameError}</FormErrorMessage>
-
-            </FormControl>
-
-            <FormControl isInvalid={!!errors.PersonError}>
-                <FormLabel>Person full name: </FormLabel>
-                <Input name="Person" required type='text' value={workoutPlan.Person} onChange={handleInputChange} />
-                <FormErrorMessage>{errors.PersonError}</FormErrorMessage>
-
-            </FormControl>
-
-            <FormControl isInvalid={!!errors.AuthorError}>
-                <FormLabel>Author: </FormLabel>
-                <Input name="Author" required type='text' value={workoutPlan.Author} onChange={handleInputChange} />
-                <FormErrorMessage>{errors.AuthorError}</FormErrorMessage>
-
-            </FormControl>
-
-            <CustomButton onClick={handleSubmitForm} className="ButtonStyle" size="lg" leftIcon={FaSave} buttonText="create workout"></CustomButton>
+        <>
 
 
-        </form>
 
+            <form onSubmit={handleSubmitForm}>
+                <Box mt={2} py={5}>
+                    <FormControl isInvalid={!!errors.NameError}>
+                        <FormLabel>Workout plan name: </FormLabel>
+                        <Input mb={3} name="Name" required type='text' value={workoutPlan.Name} onChange={handleInputChange} />
+                        <FormErrorMessage>{errors.NameError}</FormErrorMessage>
+
+                    </FormControl>
+
+                    <FormControl isInvalid={!!errors.PersonError}>
+                        <FormLabel>Person full name: </FormLabel>
+                        <Input mb={3} name="Person" required type='text' value={workoutPlan.Person} onChange={handleInputChange} />
+                        <FormErrorMessage>{errors.PersonError}</FormErrorMessage>
+
+                    </FormControl>
+
+                    <FormControl isInvalid={!!errors.AuthorError}>
+                        <FormLabel>Author: </FormLabel>
+                        <Input name="Author" required type='text' value={workoutPlan.Author} onChange={handleInputChange} />
+                        <FormErrorMessage>{errors.AuthorError}</FormErrorMessage>
+
+                    </FormControl>
+                </Box>
+                <Box display='flex' justifyContent='center' alignItems='center'>
+                    <CustomButton mt={2} mb={5} onClick={handleSubmitForm} className="ButtonStyle" size="lg" leftIcon={FaSave} buttonText="Create workout plan"></CustomButton>
+
+                </Box>
+
+
+
+
+            </form >
+
+        </>
     )
 }
 

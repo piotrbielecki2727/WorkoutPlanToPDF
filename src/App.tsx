@@ -1,11 +1,19 @@
 
-import MainPage from './Components/SideBarAndMobile';
+import SideBarAndMobile from './Components/SideBarAndMobile';
+import { useWorkoutPlanStatesSelector } from './Hooks/useWorkoutPlanStatesSelector';
+import { StartPage } from './Pages/StartPage';
 
 
 function App() {
+
+  const doWorkoutPlanExist = useWorkoutPlanStatesSelector();
+
   return (
     <>
-      <MainPage children />
+      {doWorkoutPlanExist.isWorkoutPlanCreated ? (<SideBarAndMobile children />
+      ) : (
+        <StartPage />
+      )}
     </>
   );
 }

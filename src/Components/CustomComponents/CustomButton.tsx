@@ -14,17 +14,21 @@ type Props = {
     bg?: string,
     p?: number
     maxW?: number,
+    w?: number,
+    mb?: number,
+    ml?: number,
+    fontSize?: number,
 
 }
 
 
 
-export const CustomButton: React.FC<Props> = ({maxW, mt, bg, color, p, className, onClick, buttonText, size, leftIcon, variant }) => {
+export const CustomButton: React.FC<Props> = ({ fontSize, mb, ml, w, maxW, mt, bg, color, p, className, onClick, buttonText, size, leftIcon, variant }) => {
     const LeftIcon = leftIcon;
 
     return (
         <>
-            <Button maxW={maxW} mt={mt} bg={bg} color={color} p={p} colorScheme='none' variant={variant} className={className} onClick={onClick} size={size} leftIcon={leftIcon ? <Icon as={LeftIcon} /> : undefined}>
+            <Button fontSize={fontSize} mb={mb} w={w} maxW={maxW} mt={mt} bg={bg} color={color} p={p} colorScheme='none' variant={variant} className={className} onClick={onClick} size={size} leftIcon={leftIcon ? <Icon ml={ml} color='#0bff00' as={LeftIcon} /> : undefined}>
                 <Text>{buttonText}</Text>
             </Button>
         </>

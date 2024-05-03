@@ -48,7 +48,7 @@ export default function MainPage({ children }: { children: ReactNode }) {
             </Drawer>
             <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
 
-            <Box  ml={{ base: '0px', md: '275px', lg: '275px', xl: '275px' }}>
+            <Box bg='rgba(11, 255, 0, 0.42)' h='100vh' ml={{ base: '0px', md: '275px', lg: '275px', xl: '275px' }}>
                 <DisplayCurrentWorkout />
             </Box>
         </Box>
@@ -77,7 +77,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                 <Box w='20%' color='white'>
 
                 </Box>
-                <Box  w={{ base: '400px' }} color='white'>
+                <Box w={{ base: '400px' }} color='white'>
                     <Image src={logo} />
 
                 </Box>
@@ -88,7 +88,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
             </Flex>
 
-            
+
             <DisplaySideBarContent />
 
 
