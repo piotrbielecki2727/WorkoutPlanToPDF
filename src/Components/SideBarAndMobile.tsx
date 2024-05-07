@@ -15,6 +15,7 @@ import {
     FiMenu,
 } from 'react-icons/fi';
 import logo from '../Assets/logoNew.png';
+import background from '../Assets/startpageBg.jpg';
 
 import { DisplaySideBarContent } from './SideBarContent/DisplaySideBarContent';
 import { DisplayCurrentWorkout } from './CurrentWorkout/DisplayWorkout/DisplayCurrentWorkout';
@@ -48,7 +49,9 @@ export default function MainPage({ children }: { children: ReactNode }) {
             </Drawer>
             <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
 
-            <Box bg='rgba(11, 255, 0, 0.42)' h='100vh' ml={{ base: '0px', md: '275px', lg: '275px', xl: '275px' }}>
+            <Box
+                background={`linear-gradient(rgba(11, 255, 0, 0.2), rgba(11, 255, 0, 0.3), rgba(11, 255, 0, 0.4), rgba(11, 255, 0, 0.3))`}
+                backgroundSize="cover" backgroundPosition="center" h='100vh' ml={{ base: '0px', md: '275px', lg: '275px', xl: '275px' }}>
                 <DisplayCurrentWorkout />
             </Box>
         </Box>

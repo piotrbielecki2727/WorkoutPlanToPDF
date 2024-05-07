@@ -7,7 +7,7 @@ body {
   font-family: "Righteous", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
 }
 
 code {
@@ -17,7 +17,8 @@ code {
 
 
 * {
-  
+
   font-family: "Righteous", sans-serif;
-  font-weight: 100;
+  font-weight: -100;
+
 }

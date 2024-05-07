@@ -32,6 +32,12 @@ export type Errors = {
     AuthorError: string;
 }
 
+
+export type ExerciseErrors = {
+    NameError: string;
+    MuscleError: string,
+}
+
 export type WorkoutErrors = {
     NameError: string;
 }

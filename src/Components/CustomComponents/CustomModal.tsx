@@ -5,8 +5,6 @@ import {
     ModalHeader,
     ModalBody,
     ModalCloseButton,
-    useDisclosure,
-    Divider,
 } from '@chakra-ui/react'
 import { CustomButton } from './CustomButton'
 import { FaCalendarPlus } from 'react-icons/fa'
@@ -33,20 +31,22 @@ type Props = {
     borderRadius?: number
     borderRadiusHeader?: string,
     fontSize?: number,
+    bg?: string,
+    backdropFilter?: string,
+    maxH?: string,
 }
 
 
-export const CustomModal: React.FC<Props> = ({fontSize, borderRadius, borderRadiusHeader, h, w, mb, maxW, size, mt, buttonText, onOpenModal, isOpen, onClose, ModalBodyContent, HeaderText, ModalStyle, ModalHeaderStyle, ModalBodyStyle, leftIcon }) => {
+export const CustomModal: React.FC<Props> = ({ maxH, bg, backdropFilter, fontSize, borderRadius, borderRadiusHeader, h, w, mb, maxW, size, mt, buttonText, onOpenModal, isOpen, onClose, ModalBodyContent, HeaderText, ModalStyle, ModalHeaderStyle, ModalBodyStyle, leftIcon }) => {
 
     return (
         <>
             <CustomButton fontSize={fontSize} mb={mb} maxW={maxW} w={w} mt={mt} onClick={onOpenModal} className='ButtonStyle' buttonText={buttonText} leftIcon={leftIcon} size='lg' />
             <Modal isCentered size={size} isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay bg='blackAlpha.300' backdropFilter='blur(10px) hue-rotate(90deg)' />
-                <ModalContent color='white'  borderRadius={borderRadius} h={h}>
+                <ModalOverlay bg={bg} backdropFilter={backdropFilter} />
+                <ModalContent maxH={maxH} color='white' borderRadius={borderRadius} h={h}>
                     <ModalHeader borderRadius={borderRadiusHeader} color='white' bg='black'>
                         {HeaderText}
-
                     </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody color='black'>

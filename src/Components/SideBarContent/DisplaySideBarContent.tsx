@@ -34,6 +34,8 @@ export const DisplaySideBarContent: React.FC = ({ }) => {
                             buttonText='Add workout to current plan'
                             mt={5}
                             w={250}
+                            fontSize={16}
+                            
                         />
                     </>
                 )}

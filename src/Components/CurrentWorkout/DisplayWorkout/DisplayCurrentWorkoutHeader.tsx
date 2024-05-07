@@ -6,6 +6,8 @@ import { handleResetState } from "../../../Utils/SideBarContentUtils/WorkoutPlan
 import { resetWorkoutPlanStates } from "../../../State/WorkoutPlan/workoutPlanStatesSlice"
 import { resetState } from "../../../State/WorkoutPlan/workoutPlanSlice"
 import { useDispatch } from "react-redux"
+import "./DisplayCurrentWorkoutHeader.css"
+import React, { ReactNode } from "react"
 
 
 interface Props {
@@ -17,38 +19,44 @@ export const DisplayCurrentWorkoutHeader: React.FC<Props> = ({ workoutPlanStates
 
     const dispatch = useDispatch();
 
+    const customGrid = (children: ReactNode) => {
+        return <SimpleGrid display='flex' justifyContent='center' alignItems='center' flexDirection='column'>{children}</SimpleGrid>;
+    }
+
+    const HeaderBox = (content: ReactNode, display: any) => {
+        return (
+            <Box height='80px' display={display} justifyContent='center' alignItems='center' borderRight='1px solid #363636' borderBottom={{ base: '1px solid #363636' }} >
+                {content}
+            </Box>
+        );
+    }
+
+    const headerAndText = (header: string, text: string) => {
+        return (
+            <>
+                <Text color='#0bff00' fontSize={{ base: 13, md: 16 }}>{header}</Text>
+                <Text color='white' fontSize={{ base: 13, md: 16 }}>{text}</Text>
+            </>
+        );
+    }
+
+    const buttonHeader = (button: ReactNode) => {
+        return (
+            <Box>
+                {button}
+            </Box>
+        );
+    }
+
     return (
-        <SimpleGrid borderBottom='1px solid #363636' height='80px' bg='black' columns={5}>
-
-            {workoutPlanStates.isWorkoutPlanCreated && (<>
-                <Box height='80px' display='flex' justifyContent='center' alignItems='center' borderRight='1px solid #363636'>
-                    <SimpleGrid display='flex' justifyContent='center' alignItems='center' flexDirection='column' columns={1}>
-                        <Text color='#0bff00' fontSize={16}>Workout plan:</Text>
-                        <Text color='white' fontSize={16}>{workoutPlan.Name}</Text>
-                    </SimpleGrid>
-                </Box>
-                <Box height='80px' display='flex' justifyContent='center' alignItems='center' borderRight='1px solid #363636'>
-                    <SimpleGrid display='flex' justifyContent='center' alignItems='center' flexDirection='column' columns={1}>
-                        <Text color='#0bff00' fontSize={16}>Person:</Text>
-                        <Text color='white' fontSize={16}>{workoutPlan.Person}:</Text>
-                    </SimpleGrid>
-                </Box>
-                <Box height='80px' display='flex' justifyContent='center' alignItems='center' borderRight='1px solid #363636'>
-                    <SimpleGrid display='flex' justifyContent='center' alignItems='center' flexDirection='column' columns={1}>
-                        <Text color='#0bff00'  fontSize={16}>Author:</Text>
-                        <Text color='white'  fontSize={16}>{workoutPlan.Author} </Text>
-
-                    </SimpleGrid>
-                </Box>
-                <Box height='80px' display='flex' justifyContent='center' alignItems='center' borderRight='1px solid #363636'>
-                    <CustomButton leftIcon={FaDownload} w={250} className="ButtonStyle" buttonText='Generate PDF' />
-                </Box>
-                <Box height='80px' display='flex' justifyContent='center'  alignItems='center' borderRight='1px solid #363636'>
-                    <CustomButton  leftIcon={FaTrash} w={250} buttonText='Delete plan' className="ButtonStyle" onClick={() => handleResetState(dispatch, resetState, resetWorkoutPlanStates)}></CustomButton>
-                </Box>
-            </>)}
+        <SimpleGrid bg='black' columns={{ base: 3, lg: 5 }}>
+            {HeaderBox(customGrid(headerAndText("Workout plan:", workoutPlan.Name)), 'flex')}
+            {HeaderBox(customGrid(headerAndText("Person:", workoutPlan.Person)), 'flex')}
+            {HeaderBox(customGrid(headerAndText("Author:", workoutPlan.Author)), 'flex')}
+            {HeaderBox(buttonHeader(<CustomButton leftIcon={FaDownload} maxW={{ base: 120, lg: 150 }} fontSize={{ base: 13, md: 16 }} className="ButtonStyle" buttonText='Generate PDF' />), 'flex')}
+            {HeaderBox(buttonHeader(<button />), { lg: 'none' })}
+            {HeaderBox(buttonHeader(<CustomButton leftIcon={FaTrash} maxW={{ base: 120, lg: 150 }} fontSize={{ base: 13, md: 16 }} buttonText='Delete plan' className="ButtonStyle" onClick={() => handleResetState(dispatch, resetState, resetWorkoutPlanStates)}></CustomButton>), 'flex')}
 
         </SimpleGrid>
-    )
+    );
 }
-

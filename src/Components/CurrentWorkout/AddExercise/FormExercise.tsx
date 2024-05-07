@@ -1,6 +1,6 @@
 import React from 'react';
-import { Exercise } from '../../../Types';
-import { FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react';
+import { Exercise, ExerciseErrors } from '../../../Types';
+import { FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage } from '@chakra-ui/react';
 import { CustomButton } from '../../CustomComponents/CustomButton';
 import { FaSave } from 'react-icons/fa';
 
@@ -9,21 +9,24 @@ interface Props {
     onExerciseChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onSetChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onFormSubmit: () => void;
+    validationErrors: ExerciseErrors,
 }
 
-export const FormExercise: React.FC<Props> = ({ onFormSubmit, exercise, onExerciseChange, onSetChange }) => {
+export const FormExercise: React.FC<Props> = ({ validationErrors, onFormSubmit, exercise, onExerciseChange, onSetChange }) => {
     return (
         <>
             <form>
-                <FormControl>
+                <FormControl isInvalid={!!validationErrors.NameError}>
                     <FormLabel>Exercise: </FormLabel>
-                    <Input name="Name" required type='text' value={exercise.Name} onChange={onExerciseChange} />
+                    <Input name="Name" required type='text' value={exercise.Name} onChange={onExerciseChange} minLength={5} />
+                    <FormErrorMessage>{validationErrors.NameError}</FormErrorMessage>
 
                 </FormControl>
 
-                <FormControl >
+                <FormControl isInvalid={!!validationErrors.MuscleError}>
                     <FormLabel>Muscle: </FormLabel>
                     <Input name="Muscle" required type='text' value={exercise.Muscle} onChange={onExerciseChange} />
+                    <FormErrorMessage>{validationErrors.MuscleError}</FormErrorMessage>
 
                 </FormControl>
 

@@ -5,7 +5,8 @@ import { updateWorkoutPlan } from "../../../State/WorkoutPlan/workoutPlanSlice";
 import { findWorkout } from "../../../Utils/CurrentWorkoutUtils/findWorkout";
 import { useWorkoutPlanStatesSelector } from "../../../Hooks/useWorkoutPlanStatesSelector";
 import { FormExercise } from "./FormExercise";
-import { Exercise } from "../../../Types";
+import { Exercise, ExerciseErrors } from "../../../Types";
+import { ValidateNewExercise } from "../../../Utils/AddExercise/ValidateNewExercise";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
@@ -18,7 +19,7 @@ export const FormAddExerciseToWorkout: React.FC<Props> = ({ onCloseModal, update
     const dispatch = useDispatch();
     const workoutPlanStates = useWorkoutPlanStatesSelector();
     const currentWorkout = findWorkout(workoutPlanStates.CurrentWorkoutId, workoutPlan);
-    
+
     const [exercise, setExercise] = useState<Exercise>({
         Id: 0,
         Name: '',
@@ -31,6 +32,11 @@ export const FormAddExerciseToWorkout: React.FC<Props> = ({ onCloseModal, update
 
         }
     })
+
+    const [errors, setErrors] = useState<ExerciseErrors>({
+        NameError: '',
+        MuscleError: '',
+    });
 
     const handleInputExerciseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -49,22 +55,27 @@ export const FormAddExerciseToWorkout: React.FC<Props> = ({ onCloseModal, update
     };
 
     const handleSubmitForm = () => {
-        const updatedWorkoutList = workoutPlan.Workouts.map((w) => {
-            if (w.Id === currentWorkout?.Id) {
-                return {
-                    ...w,
-                    Exercises: [...w.Exercises, exercise],
-                };
-            }
-            return w;
-        });
-
-        dispatch(updateWorkoutPlan({
-            ...workoutPlan,
-            Workouts: updatedWorkoutList,
-        }));
-
-        onCloseModal();
+        const validationErrors = ValidateNewExercise(exercise);
+        if (validationErrors) {
+            setErrors(validationErrors);
+        }
+        else {
+            setErrors({ NameError: '', MuscleError: '' });
+            const updatedWorkoutList = workoutPlan.Workouts.map((w) => {
+                if (w.Id === currentWorkout?.Id) {
+                    return {
+                        ...w,
+                        Exercises: [...w.Exercises, exercise],
+                    };
+                }
+                return w;
+            });
+            dispatch(updateWorkoutPlan({
+                ...workoutPlan,
+                Workouts: updatedWorkoutList,
+            }));
+            onCloseModal();
+        }
     }
 
 
@@ -74,6 +85,7 @@ export const FormAddExerciseToWorkout: React.FC<Props> = ({ onCloseModal, update
             onExerciseChange={handleInputExerciseChange}
             onSetChange={handleInputSetChange}
             onFormSubmit={handleSubmitForm}
+            validationErrors={errors}
         />
 
     )

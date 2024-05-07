@@ -21,7 +21,7 @@ export const DisplayCurrentWorkout: React.FC = () => {
             {currentWorkout && (
                 <>
                     <DisplayWorkoutTable currentWorkout={currentWorkout} workoutPlan={workoutPlan} />
-                    <AddExerciseToWorkoutModal />
+                    {/*<AddExerciseToWorkoutModal />*/}
 
                 </>
             )}
