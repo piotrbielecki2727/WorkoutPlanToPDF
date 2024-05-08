@@ -1,4 +1,4 @@
-import { FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react"
+import { Box, FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react"
 import React, { useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { WorkoutErrors, Workout } from "../../Types"
@@ -31,6 +31,10 @@ export const NewWorkoutForm: React.FC<Props> = ({ onCloseModal, workoutPlan, wor
         if (workoutName.length < 1) {
             setErrors({ NameError: 'Workout name cannot be empty' })
             return;
+        }
+        else if (workoutName.length > 30) {
+            setErrors({ NameError: 'Workout name cannot be longer than 30 characters' })
+
         }
         else {
             setErrors({ NameError: '' })
@@ -66,16 +70,18 @@ export const NewWorkoutForm: React.FC<Props> = ({ onCloseModal, workoutPlan, wor
 
 
     return (
-        <form>
-            <FormControl isInvalid={!!errors.NameError}>
-                <FormLabel>Workout name: </FormLabel>
-                <Input name="Name" required type='text' value={workoutName} onChange={handleInputChange} />
-                <FormErrorMessage>{errors.NameError}</FormErrorMessage>
+        <form >
+            <Box py={3} >
+                <FormControl isInvalid={!!errors.NameError}>
+                    <FormLabel>Workout name: </FormLabel>
+                    <Input name="Name" required type='text' value={workoutName} onChange={handleInputChange} />
+                    <FormErrorMessage>{errors.NameError}</FormErrorMessage>
 
-            </FormControl>
-
-            <CustomButton onClick={handleSubmitForm} className="ButtonStyle" size="lg" leftIcon={FaSave} buttonText="create workout"></CustomButton>
-
+                </FormControl>
+                <Box display='flex' justifyContent='center' alignItems='center'>
+                    <CustomButton onClick={handleSubmitForm} className="ButtonStyle" mt={5} size="lg" fontSize={16} leftIcon={FaSave} buttonText="Create new workout"></CustomButton>
+                </Box>
+            </Box>
 
         </form>
 

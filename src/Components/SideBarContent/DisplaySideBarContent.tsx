@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaCalendarPlus, FaPlus, FaUpload } from "react-icons/fa";
 import { CustomModal } from '../CustomComponents/CustomModal';
-import NewWorkoutPlanForm from './NewWorkoutPlanForm';
+import NewWorkoutPlanForm from '../NewWorkoutPlan/NewWorkoutPlanForm';
 import { useDispatch } from 'react-redux';
 import { CustomButton } from '../CustomComponents/CustomButton';
 import { handleCloseModal, handleOpenModal } from '../../Utils/SideBarContentUtils/WorkoutPlanPageUtils';
@@ -32,8 +32,11 @@ export const DisplaySideBarContent: React.FC = ({ }) => {
                             HeaderText='Enter workout name'
                             leftIcon={FaPlus}
                             buttonText='Add workout to current plan'
-                            mt={5}
                             w={250}
+                            mt={5}
+                            maxH='550px'
+                            borderRadius={10}
+                            borderRadiusHeader='10px 10px 0px 0px'
                             fontSize={16}
                             
                         />

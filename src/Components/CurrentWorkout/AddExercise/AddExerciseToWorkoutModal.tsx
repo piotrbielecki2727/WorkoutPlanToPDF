@@ -24,6 +24,9 @@ export const AddExerciseToWorkoutModal = () => {
                 leftIcon={FaPlus}
                 buttonText='Add new exercise'
                 size='2xl'
+                fontSize={16}
+                borderRadiusHeader='10px 10px 0px 0px'
+                borderRadius={10}
             />
         </Box>
 

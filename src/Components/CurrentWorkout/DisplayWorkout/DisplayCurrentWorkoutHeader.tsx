@@ -6,7 +6,6 @@ import { handleResetState } from "../../../Utils/SideBarContentUtils/WorkoutPlan
 import { resetWorkoutPlanStates } from "../../../State/WorkoutPlan/workoutPlanStatesSlice"
 import { resetState } from "../../../State/WorkoutPlan/workoutPlanSlice"
 import { useDispatch } from "react-redux"
-import "./DisplayCurrentWorkoutHeader.css"
 import React, { ReactNode } from "react"
 
 

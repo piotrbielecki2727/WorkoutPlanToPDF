@@ -18,17 +18,18 @@ type Props = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButt
     mb?: number,
     ml?: number,
     fontSize?: number | any,
+    px?: number,
 
 }
 
 
 
-export const CustomButton: React.FC<Props> = ({ type, fontSize, mb, ml, w, maxW, mt, bg, color, p, className, onClick, buttonText, size, leftIcon, variant }) => {
+export const CustomButton: React.FC<Props> = ({ px, type, fontSize, mb, ml, w, maxW, mt, bg, color, p, className, onClick, buttonText, size, leftIcon, variant }) => {
     const LeftIcon = leftIcon;
 
     return (
         <>
-            <Button type={type} fontSize={fontSize} mb={mb} w={w} maxW={maxW} mt={mt} bg={bg} color={color} p={p} colorScheme='none' variant={variant} className={className} onClick={onClick} size={size} leftIcon={leftIcon ? <Icon ml={ml} color='#0bff00' as={LeftIcon} /> : undefined}>
+            <Button type={type} px={px} fontSize={fontSize} mb={mb} w={w} maxW={maxW} mt={mt} bg={bg} color={color} p={p} colorScheme='none' variant={variant} className={className} onClick={onClick} size={size} leftIcon={leftIcon ? <Icon ml={ml} color='#0bff00' as={LeftIcon} /> : undefined}>
                 <Text>{buttonText}</Text>
             </Button>
         </>

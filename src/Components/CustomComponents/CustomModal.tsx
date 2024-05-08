@@ -34,18 +34,20 @@ type Props = {
     bg?: string,
     backdropFilter?: string,
     maxH?: string,
+    px?: number,
+    border?: string,
 }
 
 
-export const CustomModal: React.FC<Props> = ({ maxH, bg, backdropFilter, fontSize, borderRadius, borderRadiusHeader, h, w, mb, maxW, size, mt, buttonText, onOpenModal, isOpen, onClose, ModalBodyContent, HeaderText, ModalStyle, ModalHeaderStyle, ModalBodyStyle, leftIcon }) => {
+export const CustomModal: React.FC<Props> = ({border, px, maxH, bg, backdropFilter, fontSize, borderRadius, borderRadiusHeader, h, w, mb, maxW, size, mt, buttonText, onOpenModal, isOpen, onClose, ModalBodyContent, HeaderText, ModalStyle, ModalHeaderStyle, ModalBodyStyle, leftIcon }) => {
 
     return (
         <>
-            <CustomButton fontSize={fontSize} mb={mb} maxW={maxW} w={w} mt={mt} onClick={onOpenModal} className='ButtonStyle' buttonText={buttonText} leftIcon={leftIcon} size='lg' />
-            <Modal isCentered size={size} isOpen={isOpen} onClose={onClose}>
+            <CustomButton px={px} fontSize={fontSize} mb={mb} maxW={maxW} w={w} mt={mt} onClick={onOpenModal} className='ButtonStyle' buttonText={buttonText} leftIcon={leftIcon} size='lg' />
+            <Modal closeOnOverlayClick={false} isCentered size={size} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay bg={bg} backdropFilter={backdropFilter} />
-                <ModalContent maxH={maxH} color='white' borderRadius={borderRadius} h={h}>
-                    <ModalHeader borderRadius={borderRadiusHeader} color='white' bg='black'>
+                <ModalContent border={border} maxH={maxH} color='white' borderRadius={borderRadius} h={h}>
+                    <ModalHeader fontWeight={100} borderRadius={borderRadiusHeader} color='white' bg='black'>
                         {HeaderText}
                     </ModalHeader>
                     <ModalCloseButton />

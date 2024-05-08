@@ -4,9 +4,9 @@ import { RootState } from "../../../State/store";
 import { updateWorkoutPlan } from "../../../State/WorkoutPlan/workoutPlanSlice";
 import { findWorkout } from "../../../Utils/CurrentWorkoutUtils/findWorkout";
 import { useWorkoutPlanStatesSelector } from "../../../Hooks/useWorkoutPlanStatesSelector";
-import { FormExercise } from "./FormExercise";
+import { DisplayAddExerciseForm } from "./DisplayAddExerciseForm";
 import { Exercise, ExerciseErrors } from "../../../Types";
-import { ValidateNewExercise } from "../../../Utils/AddExercise/ValidateNewExercise";
+import { ValidateNewExercise } from "../../../Utils/CurrentWorkoutUtils/AddExercise/ValidateNewExercise";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
@@ -80,7 +80,7 @@ export const FormAddExerciseToWorkout: React.FC<Props> = ({ onCloseModal, update
 
 
     return (
-        <FormExercise
+        <DisplayAddExerciseForm
             exercise={exercise}
             onExerciseChange={handleInputExerciseChange}
             onSetChange={handleInputSetChange}

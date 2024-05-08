@@ -6,7 +6,7 @@ import { FaCalendarPlus, FaUpload } from 'react-icons/fa';
 import { CustomButton } from '../Components/CustomComponents/CustomButton';
 import { CustomModal } from '../Components/CustomComponents/CustomModal';
 import { handleOpenModal, handleCloseModal } from '../Utils/SideBarContentUtils/WorkoutPlanPageUtils';
-import NewWorkoutPlanForm from '../Components/SideBarContent/NewWorkoutPlanForm';
+import NewWorkoutPlanForm from '../Components/NewWorkoutPlan/NewWorkoutPlanForm';
 import startPageBg from '../Assets/startpageBg.jpg';
 
 type Props = {}

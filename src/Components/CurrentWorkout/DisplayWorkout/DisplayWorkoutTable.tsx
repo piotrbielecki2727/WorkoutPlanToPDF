@@ -1,9 +1,11 @@
-import { Box, Card, CardBody, CardHeader, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Card, CardBody, CardHeader, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import { FaTrash } from "react-icons/fa";
 import { CustomButton } from "../../CustomComponents/CustomButton";
 import { Workout, WorkoutPlan } from "../../../Types";
 import { deleteChoosedExercise } from "../../../Utils/CurrentWorkoutUtils/deleteChoosedExercise";
 import { useDispatch } from "react-redux";
+import { displayWorkoutData } from "../../../Utils/CurrentWorkoutUtils/displayWorkoutData";
+import { displayTableHeaders } from "../../../Utils/CurrentWorkoutUtils/displayTableHeaders";
 
 interface Props {
     workoutPlan: WorkoutPlan;
@@ -12,53 +14,29 @@ interface Props {
 
 
 export const DisplayWorkoutTable: React.FC<Props> = ({ workoutPlan, currentWorkout }) => {
-    const tableHeaders = ['Exercise no', 'Name', 'Primary muscle', 'Sets', 'Repetitions', 'Weight', 'Rest', 'Action'];
-    const dispatch = useDispatch()
-
-
 
 
     return (
         <>
-            <Card >
-                <CardHeader borderBottom='1px solid #363636' borderRight='1px solid #363636' textAlign='center' p={3} fontSize={18} bg='black' color='white'  >
-                    {currentWorkout.Name}
+            <Card borderRadius={0}  >
+                <CardHeader display='flex' justifyContent='center' flexDirection='row' alignItems='center' borderBottom='1px solid #363636' borderRight='1px solid #363636' gap={1} p={3} fontSize={18} bg='black' >
+                    <Text color='#0bff00'>Workout name: </Text> <Text color='white'>{currentWorkout.Name} </Text>
                 </CardHeader>
                 <CardBody p={0}>
-                    <TableContainer  >
-                        <Table variant='striped' size='sm' >
+                    <TableContainer overflowY='auto' maxH={{ '2xl': '75vh', xl: '76.0vh' }}>
+                        <Table variant='striped' size='sm' colorScheme="blackAlpha" >
                             <Thead bg='black' borderBottom='1px solid black' borderTop='0px' >
-                                {tableHeaders.map((tableHeader) => {
-                                    return (
-                                        <>
-                                            <Th borderRight='1px solid #363636' fontFamily='Righteous' fontWeight='100' textAlign='center' bg='black' color='white'>{tableHeader}</Th>
-                                            
-                                        </>
-                                    )
-                                })}
+                                {displayTableHeaders()}
                                 <Tr>
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {currentWorkout.Exercises.map((exercise, exerciseIndex) => {
-                                    const tableDataCells = [exercise.Name, exercise.Muscle, exercise.Sets.Sets, exercise.Sets.Reps, exercise.Sets.Weight, exercise.Sets.Rest];
-                                    return (
-                                        <Tr key={`${exerciseIndex}`}>
-                                            <Td textAlign='center'>{exerciseIndex + 1}</Td>
-                                            {tableDataCells.map((tableDataCell) => {
-                                                return <Td textAlign='center'>{tableDataCell}</Td>
-                                            })}
-                                            <Td textAlign='center'><CustomButton onClick={() => deleteChoosedExercise(dispatch, currentWorkout.Id, exercise.Name)} ml={2} p={1} bg="black" leftIcon={FaTrash} /></Td>
-                                        </Tr>
-                                    );
-                                })}
+                                {displayWorkoutData(currentWorkout)}
                             </Tbody>
                         </Table>
                     </TableContainer>
                 </CardBody>
             </Card >
-            <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center'  >
-            </Box>
         </>
     )
 }

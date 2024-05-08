@@ -1,4 +1,4 @@
-import { Exercise, ExerciseErrors } from "../../Types"
+import { Exercise, ExerciseErrors } from "../../../Types"
 
 export const ValidateNewExercise = (exercise: Exercise): ExerciseErrors | null => {
 
@@ -10,8 +10,8 @@ export const ValidateNewExercise = (exercise: Exercise): ExerciseErrors | null =
     if (!exercise.Name.trim()) {
         errors.NameError = "Name of exercise cannot be empty!"
     }
-    else if (exercise.Name.length > 5) {
-        errors.NameError = "Name of exercise cannot be longer than 5!"
+    else if (exercise.Name.length > 40) {
+        errors.NameError = "Name of exercise cannot be longer than 40!"
     }
     else if (exercise.Name.length < 3) {
         errors.NameError = "Name of exercise cannot be shorter than 3!"
@@ -20,8 +20,8 @@ export const ValidateNewExercise = (exercise: Exercise): ExerciseErrors | null =
     if (!exercise.Muscle.trim()) {
         errors.MuscleError = "Muscle field cannot be empty!"
     }
-    else if (exercise.Muscle.length > 10) {
-        errors.MuscleError = "Muscle field cannot be longer than 10!"
+    else if (exercise.Muscle.length > 30) {
+        errors.MuscleError = "Muscle field cannot be longer than 30!"
     }
     else if (exercise.Muscle.length < 3) {
         errors.MuscleError = "Muscle field cannot be shorter than 3!"
