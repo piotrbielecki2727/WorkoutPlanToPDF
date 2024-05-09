@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Exercise, ExerciseErrors } from '../../../Types';
 import { FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, Box } from '@chakra-ui/react';
 import { CustomButton } from '../../CustomComponents/CustomButton';
-import { FaPlus, FaSave } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 
 interface Props {
     exercise: Exercise;
@@ -12,7 +12,7 @@ interface Props {
     validationErrors: ExerciseErrors,
 }
 
-export const DisplayAddExerciseForm: React.FC<Props> = ({ validationErrors, onFormSubmit, exercise, onExerciseChange, onSetChange }) => {
+export const DisplayAddExerciseForm: FC<Props> = ({ validationErrors, onFormSubmit, exercise, onExerciseChange, onSetChange }) => {
     return (
         <>
             <form>

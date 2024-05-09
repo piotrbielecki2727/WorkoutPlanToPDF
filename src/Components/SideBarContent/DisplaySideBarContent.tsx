@@ -1,9 +1,6 @@
-import React, { useState } from 'react'
-import { FaCalendarPlus, FaPlus, FaUpload } from "react-icons/fa";
+import { FC, useState } from 'react'
+import { FaCalendarPlus, FaPlus } from "react-icons/fa";
 import { CustomModal } from '../CustomComponents/CustomModal';
-import NewWorkoutPlanForm from '../NewWorkoutPlan/NewWorkoutPlanForm';
-import { useDispatch } from 'react-redux';
-import { CustomButton } from '../CustomComponents/CustomButton';
 import { handleCloseModal, handleOpenModal } from '../../Utils/SideBarContentUtils/WorkoutPlanPageUtils';
 import { Box, Flex } from '@chakra-ui/react';
 import '../CustomComponents/CustomButton.css';
@@ -11,37 +8,42 @@ import { DisplayWorkouts } from './DisplayWorkouts';
 import NewWorkoutForm from './NewWorkoutForm';
 import { useWorkoutPlanSelector } from '../../Hooks/useWorkoutPlanSelector';
 import { useWorkoutPlanStatesSelector } from '../../Hooks/useWorkoutPlanStatesSelector';
+import WorkoutPlanForm from '../WorkoutPlan/CreateAndEditWorkoutPlan/WorkoutPlanForm';
 
 
-export const DisplaySideBarContent: React.FC = ({ }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const dispatch = useDispatch();
+export const DisplaySideBarContent: FC = ({ }) => {
+    const [isNewWorkoutPlanModalOpen, setNewWorkoutPlanModalOpen] = useState(false);
+    const [isNewWorkoutModalOpen, setNewWorkoutModalOpen] = useState(false);
     const workoutPlan = useWorkoutPlanSelector();
     const workoutPlanStates = useWorkoutPlanStatesSelector();
 
     return (
         <Box >
             <Flex justifyContent='center' alignItems='center' flexDirection='column'>
-                {workoutPlanStates.isWorkoutPlanCreated && (
-                    <>
-                        <CustomModal
-                            isOpen={isModalOpen}
-                            onOpenModal={() => handleOpenModal(setIsModalOpen)}
-                            onClose={() => handleCloseModal(setIsModalOpen)}
-                            ModalBodyContent={<NewWorkoutForm onCloseModal={() => handleCloseModal(setIsModalOpen)} />}
-                            HeaderText='Enter workout name'
-                            leftIcon={FaPlus}
-                            buttonText='Add workout to current plan'
-                            w={250}
-                            mt={5}
-                            maxH='550px'
-                            borderRadius={10}
-                            borderRadiusHeader='10px 10px 0px 0px'
-                            fontSize={16}
-                            
-                        />
-                    </>
-                )}
+
+                <CustomModal
+                    mt={5}
+                    isOpen={isNewWorkoutPlanModalOpen}
+                    onOpenModal={() => handleOpenModal(setNewWorkoutPlanModalOpen)}
+                    onClose={() => handleCloseModal(setNewWorkoutPlanModalOpen)}
+                    ModalBodyContent={<WorkoutPlanForm isEditing={true} onCloseModal={() => handleCloseModal(setNewWorkoutPlanModalOpen)} />}
+                    HeaderText='Enter workout plan details...'
+                    leftIcon={FaCalendarPlus}
+                    buttonText='Edit workout plan'
+                />
+
+                <CustomModal
+                    mt={5}
+                    isOpen={isNewWorkoutModalOpen}
+                    onOpenModal={() => handleOpenModal(setNewWorkoutModalOpen)}
+                    onClose={() => handleCloseModal(setNewWorkoutModalOpen)}
+                    ModalBodyContent={<NewWorkoutForm onCloseModal={() => handleCloseModal(setNewWorkoutModalOpen)} />}
+                    HeaderText='Enter workout name'
+                    leftIcon={FaPlus}
+                    buttonText='Add workout to current plan'
+                />
+
+
 
                 {workoutPlanStates.doWorkoutsExist && (
                     <>

@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { CustomButton } from '../../CustomComponents/CustomButton'
+import { useState } from 'react'
 import { FaPlus } from 'react-icons/fa'
 import { CustomModal } from '../../CustomComponents/CustomModal'
 import { handleCloseModal, handleOpenModal } from '../../../Utils/SideBarContentUtils/WorkoutPlanPageUtils'

@@ -1,9 +1,6 @@
 import { Th } from "@chakra-ui/react";
 
 
-
-
-
 export const displayTableHeaders = () => {
     const tableHeaders = ['Exercise no', 'Name', 'Primary muscle', 'Sets', 'Repetitions', 'Weight', 'Rest', 'Action'];
     return tableHeaders.map((tableHeader) => {

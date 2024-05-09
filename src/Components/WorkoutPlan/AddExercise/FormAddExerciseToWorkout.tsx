@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { RootState } from "../../../State/store";
 import { updateWorkoutPlan } from "../../../State/WorkoutPlan/workoutPlanSlice";
@@ -6,7 +6,7 @@ import { findWorkout } from "../../../Utils/CurrentWorkoutUtils/findWorkout";
 import { useWorkoutPlanStatesSelector } from "../../../Hooks/useWorkoutPlanStatesSelector";
 import { DisplayAddExerciseForm } from "./DisplayAddExerciseForm";
 import { Exercise, ExerciseErrors } from "../../../Types";
-import { ValidateNewExercise } from "../../../Utils/CurrentWorkoutUtils/AddExercise/ValidateNewExercise";
+import { ValidateNewExercise } from "../../../Utils/CurrentWorkoutUtils/ValidateNewExercise";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
@@ -15,7 +15,7 @@ interface Props extends PropsFromRedux {
 
 
 
-export const FormAddExerciseToWorkout: React.FC<Props> = ({ onCloseModal, updateWorkoutPlan, workoutPlan }) => {
+export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkoutPlan, workoutPlan }) => {
     const dispatch = useDispatch();
     const workoutPlanStates = useWorkoutPlanStatesSelector();
     const currentWorkout = findWorkout(workoutPlanStates.CurrentWorkoutId, workoutPlan);

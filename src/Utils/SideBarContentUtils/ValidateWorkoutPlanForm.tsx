@@ -1,21 +1,21 @@
 import { Errors, WorkoutPlan } from "../../Types";
 
-export const ValidateWorkoutPlanForm = (workoutPlan: WorkoutPlan): Errors | null => {
+export const ValidateWorkoutPlanForm = (formData: WorkoutPlan): Errors | null => {
     const errors: Errors = {
         NameError: '',
         PersonError: '',
         AuthorError: '',
     };
 
-    if (!workoutPlan.Name.trim()) {
+    if (!formData.Name.trim()) {
         errors.NameError = 'Workout plan name is required';
     }
 
-    if (!workoutPlan.Person.trim()) {
+    if (!formData.Person.trim()) {
         errors.PersonError = 'Person full name is required';
     }
 
-    if (!workoutPlan.Author.trim()) {
+    if (!formData.Author.trim()) {
         errors.AuthorError = 'Author is required';
     }
 

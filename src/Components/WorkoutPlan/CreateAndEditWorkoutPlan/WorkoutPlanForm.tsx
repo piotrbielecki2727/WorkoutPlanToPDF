@@ -1,21 +1,25 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
-import { Errors, WorkoutPlan, WorkoutPlanStatesTypes } from "../../Types"
-import { ValidateWorkoutPlanForm } from "../../Utils/SideBarContentUtils/ValidateWorkoutPlanForm";
-import { updateWorkoutPlan } from "../../State/WorkoutPlan/workoutPlanSlice";
-import { RootState } from "../../State/store";
-import { updateWorkoutPlanStates } from "../../State/WorkoutPlan/workoutPlanStatesSlice";
-import { DisplayNewWorkoutPlanForm } from "./DisplayNewWorkoutPlanForm";
+import { Errors, WorkoutPlan, WorkoutPlanStatesTypes } from "../../../Types";
+import { ValidateWorkoutPlanForm } from "../../../Utils/SideBarContentUtils/ValidateWorkoutPlanForm";
+import { DisplayWorkoutPlanForm } from "./DisplayWorkoutPlanForm";
+import { RootState } from "../../../State/store";
+import { updateWorkoutPlan } from "../../../State/WorkoutPlan/workoutPlanSlice";
+import { updateWorkoutPlanStates } from "../../../State/WorkoutPlan/workoutPlanStatesSlice";
+
+
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
-
+    isEditing: boolean,
+    workoutPlan: WorkoutPlan;
 };
 
 
 
-export const NewWorkoutPlanForm: React.FC<Props> = ({ workoutPlan, updateWorkoutPlan, onCloseModal, workoutPlanStates, updateWorkoutPlanStates }) => {
+export const WorkoutPlanForm: FC<Props> = ({ isEditing, workoutPlan, updateWorkoutPlan, onCloseModal, workoutPlanStates, updateWorkoutPlanStates }) => {
     const dispatch = useDispatch();
+
 
     const [errors, setErrors] = useState<Errors>({
         NameError: '',
@@ -23,22 +27,28 @@ export const NewWorkoutPlanForm: React.FC<Props> = ({ workoutPlan, updateWorkout
         AuthorError: '',
     });
 
-    const [workoutPlanData, setWorkoutPlanData] = useState<WorkoutPlan>({
-        Name: '',
-        Person: '',
-        Author: '',
-        Workouts: []
+
+
+    const [editedData, setEditedData] = useState<WorkoutPlan>({
+        ...workoutPlan
     });
 
+    const [workoutPlanData, setWorkoutPlanData] = useState<WorkoutPlan>(editedData);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setWorkoutPlanData({ ...workoutPlanData, [name]: value });
+        const newData = { ...workoutPlanData, [name]: value };
+        setWorkoutPlanData(newData);
+        if (isEditing) {
+            setEditedData(newData);
+        }
     }
 
+
+
     const handleSubmitForm = () => {
-        console.log(workoutPlanData);
-        const validationErrors = ValidateWorkoutPlanForm(workoutPlanData);
+        const formData = isEditing ? editedData : workoutPlanData;
+        const validationErrors = ValidateWorkoutPlanForm(formData);
         if (validationErrors) {
             setErrors(validationErrors);
         } else {
@@ -47,7 +57,7 @@ export const NewWorkoutPlanForm: React.FC<Props> = ({ workoutPlan, updateWorkout
                 ...workoutPlanStates,
                 isWorkoutPlanCreated: true,
             }
-            dispatch(updateWorkoutPlan(workoutPlanData));
+            dispatch(updateWorkoutPlan(formData));
             dispatch(updateWorkoutPlanStates(updatedWorkoutPlanStates));
             onCloseModal();
 
@@ -56,12 +66,14 @@ export const NewWorkoutPlanForm: React.FC<Props> = ({ workoutPlan, updateWorkout
 
     return (
         <>
-            <DisplayNewWorkoutPlanForm
+            <DisplayWorkoutPlanForm
                 workoutPlanData={workoutPlanData}
                 onInputChange={handleInputChange}
                 onFormSubmit={handleSubmitForm}
-                validationErrors={errors} />
-
+                validationErrors={errors}
+                isEditing={isEditing}
+                editedData={editedData}
+            />
 
         </>
     )
@@ -79,4 +91,4 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
-export default connector(NewWorkoutPlanForm);
+export default connector(WorkoutPlanForm);

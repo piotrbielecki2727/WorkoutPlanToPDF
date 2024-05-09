@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { WorkoutPlan, WorkoutPlanStatesTypes } from "../../Types"
 import { Box, Card, CardBody, CardHeader, Heading, Stack, StackDivider, Text } from "@chakra-ui/react";
 
@@ -7,7 +8,7 @@ interface DisplayWorkoutPlanProps {
 }
 
 
-export const DisplayWorkoutPlan: React.FC<DisplayWorkoutPlanProps> = ({ workoutPlanStates, workoutPlan }) => {
+export const DisplayWorkoutPlan: FC<DisplayWorkoutPlanProps> = ({ workoutPlanStates, workoutPlan }) => {
 
     return (
         <>

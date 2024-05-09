@@ -1,5 +1,5 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
-import { Button, ButtonProps, Icon, IconProps, Text } from '@chakra-ui/react';
+import { ButtonHTMLAttributes, DetailedHTMLProps, FC } from 'react'
+import { Button, Icon, Text } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 
 type Props = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & {
@@ -19,17 +19,18 @@ type Props = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButt
     ml?: number,
     fontSize?: number | any,
     px?: number,
+    py?: number,
 
 }
 
 
 
-export const CustomButton: React.FC<Props> = ({ px, type, fontSize, mb, ml, w, maxW, mt, bg, color, p, className, onClick, buttonText, size, leftIcon, variant }) => {
+export const CustomButton: FC<Props> = ({ py, px, type, fontSize, mb, ml, w, maxW, mt, bg, color, p, className, onClick, buttonText, size, leftIcon, variant }) => {
     const LeftIcon = leftIcon;
 
     return (
         <>
-            <Button type={type} px={px} fontSize={fontSize} mb={mb} w={w} maxW={maxW} mt={mt} bg={bg} color={color} p={p} colorScheme='none' variant={variant} className={className} onClick={onClick} size={size} leftIcon={leftIcon ? <Icon ml={ml} color='#0bff00' as={LeftIcon} /> : undefined}>
+            <Button py={{ base: 3, md: 6 }} type={type} px={px} fontSize={{ base: 13, md: 16 }} mb={mb} w={w} maxW={maxW} mt={mt} bg={bg} color={color} p={p} colorScheme='none' variant={variant} className={className} onClick={onClick} size={size} leftIcon={leftIcon ? <Icon ml={ml} color='#0bff00' as={LeftIcon} /> : undefined}>
                 <Text>{buttonText}</Text>
             </Button>
         </>

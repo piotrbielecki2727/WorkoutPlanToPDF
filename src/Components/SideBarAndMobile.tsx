@@ -15,10 +15,9 @@ import {
     FiMenu,
 } from 'react-icons/fi';
 import logo from '../Assets/logoNew.png';
-import background from '../Assets/startpageBg.jpg';
 
 import { DisplaySideBarContent } from './SideBarContent/DisplaySideBarContent';
-import { DisplayCurrentWorkout } from './CurrentWorkout/DisplayCurrentWorkout';
+import { DisplayCurrentWorkout } from './WorkoutPlan/DisplayCurrentWorkout';
 
 
 export default function MainPage({ children }: { children: ReactNode }) {
@@ -69,6 +68,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
             w={{ base: 'full', md: '275px', xl: '275px' }}
             pos="fixed"
             h="full"
+           
             {...rest}>
             <Flex
 
@@ -113,6 +113,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             bg='black'
             justifyContent='space-between'
             gap={5}
+            borderBottom='1px solid #363636'
             {...rest}>
             <Box w='20%' color='white' >
                 <IconButton

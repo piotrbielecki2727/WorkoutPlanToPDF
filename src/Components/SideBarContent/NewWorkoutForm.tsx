@@ -1,5 +1,5 @@
 import { Box, FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react"
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { WorkoutErrors, Workout } from "../../Types"
 import { CustomButton } from "../CustomComponents/CustomButton";
@@ -13,7 +13,7 @@ interface Props extends PropsFromRedux {
 
 };
 
-export const NewWorkoutForm: React.FC<Props> = ({ onCloseModal, workoutPlan, workoutPlanStates, updateWorkoutPlanStates }) => {
+export const NewWorkoutForm: FC<Props> = ({ onCloseModal, workoutPlan, workoutPlanStates, updateWorkoutPlanStates }) => {
     const dispatch = useDispatch();
     const [workoutName, setWorkoutName] = useState('');
 

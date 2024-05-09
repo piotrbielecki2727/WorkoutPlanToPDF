@@ -1,14 +1,15 @@
+import { FC } from "react";
 import { useWorkoutPlanSelector } from "../../Hooks/useWorkoutPlanSelector";
 import { useWorkoutPlanStatesSelector } from "../../Hooks/useWorkoutPlanStatesSelector";
 import { findWorkout } from "../../Utils/CurrentWorkoutUtils/findWorkout";
 import { AddExerciseToWorkoutModal } from "./AddExercise/AddExerciseToWorkoutModal";
-import { DisplayCurrentWorkoutHeader } from "./DisplayWorkout/DisplayCurrentWorkoutHeader";
+import { DisplayWorkoutPlanHeader } from "./DisplayWorkout/DisplayWorkoutPlanHeader";
 import { DisplayWorkoutTable } from "./DisplayWorkout/DisplayWorkoutTable";
 
 
 
 
-export const DisplayCurrentWorkout: React.FC = () => {
+export const DisplayCurrentWorkout: FC = () => {
 
     const workoutPlan = useWorkoutPlanSelector();
     const workoutPlanStates = useWorkoutPlanStatesSelector();
@@ -17,7 +18,7 @@ export const DisplayCurrentWorkout: React.FC = () => {
 
     return (
         <>
-            <DisplayCurrentWorkoutHeader workoutPlanStates={workoutPlanStates} workoutPlan={workoutPlan} />
+            <DisplayWorkoutPlanHeader workoutPlanStates={workoutPlanStates} workoutPlan={workoutPlan} />
 
             {currentWorkout && (
                 <>
