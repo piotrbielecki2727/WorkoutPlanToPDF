@@ -4,6 +4,7 @@ import { CustomModal } from '../../CustomComponents/CustomModal'
 import { handleCloseModal, handleOpenModal } from '../../../Utils/SideBarContentUtils/WorkoutPlanPageUtils'
 import FormAddExerciseToWorkout from './FormAddExerciseToWorkout'
 import { Box } from '@chakra-ui/react'
+import { CustomButton } from '../../CustomComponents/CustomButton'
 
 
 
@@ -17,15 +18,11 @@ export const AddExerciseToWorkoutModal = () => {
                 mt={5}
                 ModalBodyContent={<FormAddExerciseToWorkout onCloseModal={() => handleCloseModal(setIsModalOpen)} />}
                 isOpen={isModalOpen}
-                onOpenModal={() => handleOpenModal(setIsModalOpen)}
                 onClose={() => handleCloseModal(setIsModalOpen)}
                 HeaderText='Enter exercise details'
-                leftIcon={FaPlus}
-                buttonText='Add new exercise'
-                size='2xl'
-                fontSize={16}
                 borderRadiusHeader='10px 10px 0px 0px'
-                borderRadius={10}
+                buttonType={<CustomButton buttonText='Add new exercise' leftIcon={FaPlus} onClick={() => handleOpenModal(setIsModalOpen)} />}
+
             />
         </Box>
 

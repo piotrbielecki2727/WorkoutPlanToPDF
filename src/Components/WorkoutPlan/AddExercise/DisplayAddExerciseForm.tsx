@@ -78,7 +78,7 @@ export const DisplayAddExerciseForm: FC<Props> = ({ validationErrors, onFormSubm
                 </FormControl>
 
                 <Box py={2} textAlign='center'>
-                    <CustomButton onClick={onFormSubmit} className="ButtonStyle" size="lg" leftIcon={FaPlus} buttonText="Add new exercise"></CustomButton>
+                    <CustomButton onClick={onFormSubmit}  size="lg" leftIcon={FaPlus} buttonText="Add new exercise"></CustomButton>
                 </Box>
 
 

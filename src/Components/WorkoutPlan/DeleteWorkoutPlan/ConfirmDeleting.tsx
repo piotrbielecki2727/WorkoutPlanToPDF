@@ -26,7 +26,6 @@ export const ConfirmDeleting = () => {
                 mt={3}
                 leftIcon={FaTrash}
                 buttonText='Delete whole workout plan'
-                className="ButtonStyle"
                 onClick={() => handleResetState(dispatch, resetState, resetWorkoutPlanStates)}
             />
             </Box>

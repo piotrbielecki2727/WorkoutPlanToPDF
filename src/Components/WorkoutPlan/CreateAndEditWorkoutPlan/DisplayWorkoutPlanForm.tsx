@@ -43,7 +43,7 @@ export const DisplayWorkoutPlanForm: FC<Props> = ({ editedData, isEditing, worko
                 </FormControl>
             </Box>
             <Box h='80px' display='flex' justifyContent='center' alignItems='center'>
-                <CustomButton onClick={onFormSubmit} className="ButtonStyle" leftIcon={FaSave} buttonText="Create workout plan"></CustomButton>
+                <CustomButton onClick={onFormSubmit} leftIcon={FaSave} buttonText="Create workout plan"></CustomButton>
             </Box>
 
         </form >

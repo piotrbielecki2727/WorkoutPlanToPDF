@@ -50,8 +50,8 @@ export const DisplayWorkoutPlanHeader: FC<Props> = ({ workoutPlanStates, workout
             {HeaderBox(customGrid(headerAndText("Workout plan:", workoutPlan.Name)))}
             {HeaderBox(customGrid(headerAndText("Person:", workoutPlan.Person)))}
             {HeaderBox(customGrid(headerAndText("Author:", workoutPlan.Author)))}
-            {HeaderBox(buttonHeader(<CustomButton leftIcon={FaFilePdf} p={3} maxW={{ base: 120, sm: 150, xl: 180 }} fontSize={{ base: 13, sm: 16 }} className="ButtonStyle" buttonText='Generate PDF' />))}
-            {HeaderBox(buttonHeader(<CustomButton leftIcon={FaFileDownload} p={3} maxW={{ base: 120, sm: 150, xl: 180 }} fontSize={{ base: 13, sm: 16 }} buttonText='Download plan' className="ButtonStyle"></CustomButton>))}
+            {HeaderBox(buttonHeader(<CustomButton leftIcon={FaFilePdf} p={3} maxW={{ base: 120, sm: 150, xl: 180 }} fontSize={{ base: 13, sm: 16 }}  buttonText='Generate PDF' />))}
+            {HeaderBox(buttonHeader(<CustomButton leftIcon={FaFileDownload} p={3} maxW={{ base: 120, sm: 150, xl: 180 }} fontSize={{ base: 13, sm: 16 }} buttonText='Download plan'></CustomButton>))}
             {HeaderBox(buttonHeader(<DeleteWorkoutPlanModal />))}
         </SimpleGrid>
     );

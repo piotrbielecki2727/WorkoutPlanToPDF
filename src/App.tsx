@@ -1,5 +1,5 @@
 
-import SideBarAndMobile from './Components/SideBarAndMobile';
+import MainApplication from './Components/MainApplication';
 import { useWorkoutPlanStatesSelector } from './Hooks/useWorkoutPlanStatesSelector';
 import { StartPage } from './Pages/StartPage';
 
@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      {doWorkoutPlanExist.isWorkoutPlanCreated ? (<SideBarAndMobile children />
+      {doWorkoutPlanExist.isWorkoutPlanCreated ? (<MainApplication />
       ) : (
         <StartPage />
       )}

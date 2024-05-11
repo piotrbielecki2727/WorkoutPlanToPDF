@@ -5,10 +5,11 @@ import { handleCloseModal, handleOpenModal } from '../../Utils/SideBarContentUti
 import { Box, Flex } from '@chakra-ui/react';
 import '../CustomComponents/CustomButton.css';
 import { DisplayWorkouts } from './DisplayWorkouts';
-import NewWorkoutForm from './NewWorkoutForm';
+import WorkoutForm from './WorkoutForm';
 import { useWorkoutPlanSelector } from '../../Hooks/useWorkoutPlanSelector';
 import { useWorkoutPlanStatesSelector } from '../../Hooks/useWorkoutPlanStatesSelector';
 import WorkoutPlanForm from '../WorkoutPlan/CreateAndEditWorkoutPlan/WorkoutPlanForm';
+import { CustomButton } from '../CustomComponents/CustomButton';
 
 
 export const DisplaySideBarContent: FC = ({ }) => {
@@ -24,23 +25,21 @@ export const DisplaySideBarContent: FC = ({ }) => {
                 <CustomModal
                     mt={5}
                     isOpen={isNewWorkoutPlanModalOpen}
-                    onOpenModal={() => handleOpenModal(setNewWorkoutPlanModalOpen)}
                     onClose={() => handleCloseModal(setNewWorkoutPlanModalOpen)}
                     ModalBodyContent={<WorkoutPlanForm isEditing={true} onCloseModal={() => handleCloseModal(setNewWorkoutPlanModalOpen)} />}
                     HeaderText='Enter workout plan details...'
-                    leftIcon={FaCalendarPlus}
-                    buttonText='Edit workout plan'
-                />
+                    buttonType={<CustomButton buttonText='Edit workout plan' leftIcon={FaCalendarPlus} onClick={() => handleOpenModal(setNewWorkoutPlanModalOpen)}/>}
+
+               />
 
                 <CustomModal
                     mt={5}
                     isOpen={isNewWorkoutModalOpen}
-                    onOpenModal={() => handleOpenModal(setNewWorkoutModalOpen)}
                     onClose={() => handleCloseModal(setNewWorkoutModalOpen)}
-                    ModalBodyContent={<NewWorkoutForm onCloseModal={() => handleCloseModal(setNewWorkoutModalOpen)} />}
+                    ModalBodyContent={<WorkoutForm  onCloseModal={() => handleCloseModal(setNewWorkoutModalOpen)} />}
                     HeaderText='Enter workout name'
-                    leftIcon={FaPlus}
-                    buttonText='Add workout to current plan'
+                    buttonType={<CustomButton buttonText='Add workout to current plan' leftIcon={FaPlus} onClick={() => handleOpenModal(setNewWorkoutModalOpen)}/>}
+
                 />
 
 

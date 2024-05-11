@@ -4,8 +4,7 @@ import { WorkoutPlan, WorkoutPlanStatesTypes } from "../../Types";
 import { useDispatch } from "react-redux";
 import { updateWorkoutPlanStates } from "../../State/WorkoutPlan/workoutPlanStatesSlice";
 import { FC, useEffect } from "react";
-import './DisplayWorkouts.css';
-import { displayCreatedWorkouts } from "../../Utils/SideBarContentUtils/displayCreatedWorkouts";
+import { DisplayCreatedWorkouts } from "./DisplayCreatedWorkouts";
 
 
 interface DisplayWorkoutsProps {
@@ -48,7 +47,7 @@ export const DisplayWorkouts: FC<DisplayWorkoutsProps> = ({ workoutPlan, workout
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {displayCreatedWorkouts(workoutPlan, workoutPlanStates, dispatch)}
+                                {DisplayCreatedWorkouts(workoutPlan, workoutPlanStates, dispatch)}
                             </Tbody>
                         </Table>
                     </TableContainer>

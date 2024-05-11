@@ -1,8 +1,10 @@
 export const handleCloseModal = (setIsModalOpen: Function) => {
+    console.log("zamykam")
     setIsModalOpen(false);
 };
 
 export const handleOpenModal = (setIsModalOpen: Function) => {
+    console.log("otwirran")
     setIsModalOpen(true);
 };
 

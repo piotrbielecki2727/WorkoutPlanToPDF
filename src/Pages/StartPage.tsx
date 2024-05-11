@@ -34,21 +34,19 @@ export const StartPage = (props: Props) => {
                             <CustomModal
                                 mt={5}
                                 isOpen={isModalOpen}
-                                onOpenModal={() => handleOpenModal(setIsModalOpen)}
                                 onClose={() => handleCloseModal(setIsModalOpen)}
                                 ModalBodyContent={<WorkoutPlanForm isEditing={false} onCloseModal={() => handleCloseModal(setIsModalOpen)} />}
                                 HeaderText='Enter workout plan details...'
-                                leftIcon={FaCalendarPlus}
-                                buttonText='Create new workout plan'
-                            />
+                                buttonType={<CustomButton buttonText='Create new workout plan' leftIcon={FaCalendarPlus} onClick={() => handleOpenModal(setIsModalOpen)} />} />
+
 
                             <Text mt={3} mb={3}>Or</Text>
-                            <CustomButton className='ButtonStyle' leftIcon={FaUpload} buttonText='Load existing workout plan' />
+                            <CustomButton leftIcon={FaUpload} buttonText='Load existing workout plan' />
                         </>
                     )}
                 </Box>
             </Box>
 
-        </Box>
+        </Box >
     )
 }

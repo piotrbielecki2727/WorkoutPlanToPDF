@@ -4,6 +4,7 @@ import { CustomModal } from '../../CustomComponents/CustomModal'
 import { handleCloseModal, handleOpenModal } from '../../../Utils/SideBarContentUtils/WorkoutPlanPageUtils'
 import { Box } from '@chakra-ui/react'
 import { ConfirmDeleting } from './ConfirmDeleting'
+import { CustomButton } from '../../CustomComponents/CustomButton'
 
 
 
@@ -16,11 +17,9 @@ export const DeleteWorkoutPlanModal = () => {
             <CustomModal
                 ModalBodyContent={<ConfirmDeleting />}
                 isOpen={isModalOpen}
-                onOpenModal={() => handleOpenModal(setIsModalOpen)}
                 onClose={() => handleCloseModal(setIsModalOpen)}
                 HeaderText='Confirm workout plan deleting'
-                leftIcon={FaTrash}
-                buttonText='Delete plan'
+                buttonType={<CustomButton buttonText='Delete plan' onClick={() => handleOpenModal(setIsModalOpen)} leftIcon={FaTrash} />}
             />
         </Box>
 

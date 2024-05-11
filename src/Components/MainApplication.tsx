@@ -15,12 +15,11 @@ import {
     FiMenu,
 } from 'react-icons/fi';
 import logo from '../Assets/logoNew.png';
-
 import { DisplaySideBarContent } from './SideBarContent/DisplaySideBarContent';
 import { DisplayCurrentWorkout } from './WorkoutPlan/DisplayCurrentWorkout';
 
 
-export default function MainPage({ children }: { children: ReactNode }) {
+export default function MainApplication() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <Box minH="100vh">
@@ -43,13 +42,12 @@ export default function MainPage({ children }: { children: ReactNode }) {
                 >
                     <SidebarContent onClose={onClose} />
 
-
                 </DrawerContent>
             </Drawer>
             <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
 
             <Box
-                 background={`linear-gradient(rgba(11, 255, 0, 0.5), rgba(11, 255, 0, 0.3), rgba(11, 255, 0, 0.2), rgba(11, 255, 0, 0.3))`}
+                background={`linear-gradient(rgba(11, 255, 0, 0.5), rgba(11, 255, 0, 0.3), rgba(11, 255, 0, 0.2), rgba(11, 255, 0, 0.3))`}
                 backgroundSize="cover" backgroundPosition="center" h='100vh' ml={{ base: '0px', md: '275px', lg: '275px', xl: '275px' }}>
                 <DisplayCurrentWorkout />
             </Box>
@@ -68,7 +66,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
             w={{ base: 'full', md: '275px', xl: '275px' }}
             pos="fixed"
             h="full"
-           
+
             {...rest}>
             <Flex
 
