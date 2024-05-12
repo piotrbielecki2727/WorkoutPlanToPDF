@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import { deleteWorkout } from "../../State/WorkoutPlan/workoutPlanSlice"
 
 

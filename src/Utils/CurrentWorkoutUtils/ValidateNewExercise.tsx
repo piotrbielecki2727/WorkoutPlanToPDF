@@ -1,6 +1,6 @@
 import { Exercise, ExerciseErrors } from "../../Types"
 
-export const ValidateNewExercise = (exercise: Exercise): ExerciseErrors | null => {
+export const validateNewExercise = (exercise: Exercise): ExerciseErrors | null => {
 
     const errors: ExerciseErrors = {
         NameError: '',

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FaPlus } from 'react-icons/fa'
 import { CustomModal } from '../../CustomComponents/CustomModal'
-import { handleCloseModal, handleOpenModal } from '../../../Utils/SideBarContentUtils/WorkoutPlanPageUtils'
+import { handleCloseModal, handleOpenModal } from '../../../Utils/WorkoutsUtils/workoutPlanPageUtils'
 import FormAddExerciseToWorkout from './FormAddExerciseToWorkout'
 import { Box } from '@chakra-ui/react'
 import { CustomButton } from '../../CustomComponents/CustomButton'

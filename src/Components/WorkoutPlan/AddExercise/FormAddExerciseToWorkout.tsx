@@ -6,7 +6,7 @@ import { findWorkout } from "../../../Utils/CurrentWorkoutUtils/findWorkout";
 import { useWorkoutPlanStatesSelector } from "../../../Hooks/useWorkoutPlanStatesSelector";
 import { DisplayAddExerciseForm } from "./DisplayAddExerciseForm";
 import { Exercise, ExerciseErrors } from "../../../Types";
-import { ValidateNewExercise } from "../../../Utils/CurrentWorkoutUtils/ValidateNewExercise";
+import { validateNewExercise } from "../../../Utils/CurrentWorkoutUtils/validateNewExercise";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
@@ -55,7 +55,7 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
     };
 
     const handleSubmitForm = () => {
-        const validationErrors = ValidateNewExercise(exercise);
+        const validationErrors = validateNewExercise(exercise);
         if (validationErrors) {
             setErrors(validationErrors);
         }

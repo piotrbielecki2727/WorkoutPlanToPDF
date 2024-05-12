@@ -1,11 +1,11 @@
 import React, { FC, useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { Errors, WorkoutPlan, WorkoutPlanStatesTypes } from "../../../Types";
-import { ValidateWorkoutPlanForm } from "../../../Utils/SideBarContentUtils/ValidateWorkoutPlanForm";
 import { DisplayWorkoutPlanForm } from "./DisplayWorkoutPlanForm";
 import { RootState } from "../../../State/store";
 import { updateWorkoutPlan } from "../../../State/WorkoutPlan/workoutPlanSlice";
 import { updateWorkoutPlanStates } from "../../../State/WorkoutPlan/workoutPlanStatesSlice";
+import { validateWorkoutPlanForm } from "../../../Utils/WorkoutPlanUtils/validateWorkoutPlanForm";
 
 
 
@@ -45,10 +45,9 @@ export const WorkoutPlanForm: FC<Props> = ({ isEditing, workoutPlan, updateWorko
     }
 
 
-
     const handleSubmitForm = () => {
         const formData = isEditing ? editedData : workoutPlanData;
-        const validationErrors = ValidateWorkoutPlanForm(formData);
+        const validationErrors = validateWorkoutPlanForm(formData);
         if (validationErrors) {
             setErrors(validationErrors);
         } else {
@@ -92,3 +91,5 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 export default connector(WorkoutPlanForm);
+
+

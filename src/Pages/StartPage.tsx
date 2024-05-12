@@ -5,7 +5,7 @@ import { useWorkoutPlanStatesSelector } from '../Hooks/useWorkoutPlanStatesSelec
 import { FaCalendarPlus, FaUpload } from 'react-icons/fa';
 import { CustomButton } from '../Components/CustomComponents/CustomButton';
 import { CustomModal } from '../Components/CustomComponents/CustomModal';
-import { handleOpenModal, handleCloseModal } from '../Utils/SideBarContentUtils/WorkoutPlanPageUtils';
+import { handleOpenModal, handleCloseModal } from '../Utils/WorkoutsUtils/workoutPlanPageUtils';
 import startPageBg from '../Assets/startpageBg.jpg';
 import WorkoutPlanForm from '../Components/WorkoutPlan/CreateAndEditWorkoutPlan/WorkoutPlanForm';
 

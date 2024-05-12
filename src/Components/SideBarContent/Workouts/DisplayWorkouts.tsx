@@ -1,33 +1,26 @@
 import { Table, TableContainer, Thead, Tr, Th, Tbody, Card, CardHeader, Text } from "@chakra-ui/react"
 import { CardBody } from "react-bootstrap";
-import { WorkoutPlan, WorkoutPlanStatesTypes } from "../../Types";
+import { WorkoutPlan, WorkoutPlanStatesTypes } from "../../../Types";
 import { useDispatch } from "react-redux";
-import { updateWorkoutPlanStates } from "../../State/WorkoutPlan/workoutPlanStatesSlice";
+import { updateWorkoutPlanStates } from "../../../State/WorkoutPlan/workoutPlanStatesSlice";
 import { FC, useEffect } from "react";
 import { DisplayCreatedWorkouts } from "./DisplayCreatedWorkouts";
+import { checkIfWorkoutsExist } from "../../../Utils/WorkoutsUtils/checkIfWorkoutsExist";
 
 
 interface DisplayWorkoutsProps {
     workoutPlan: WorkoutPlan,
     workoutPlanStates: WorkoutPlanStatesTypes
+    dispatch: Function,
 
 }
 
-export const DisplayWorkouts: FC<DisplayWorkoutsProps> = ({ workoutPlan, workoutPlanStates }) => {
+export const DisplayWorkouts: FC<DisplayWorkoutsProps> = ({ workoutPlan, workoutPlanStates, dispatch }) => {
 
-    const dispatch = useDispatch();
 
     useEffect(() => {
-        if (workoutPlan.Workouts.length === 0) {
-            dispatch(
-                updateWorkoutPlanStates({
-                    ...workoutPlanStates,
-                    doWorkoutsExist: false,
-                    CurrentWorkoutId: 0,
-                })
-            );
-        }
-    }, [workoutPlan.Workouts, dispatch, workoutPlanStates]);
+        checkIfWorkoutsExist(workoutPlan, workoutPlanStates, dispatch, updateWorkoutPlanStates)
+    }, [workoutPlan.Workouts]);
 
 
 
@@ -47,7 +40,7 @@ export const DisplayWorkouts: FC<DisplayWorkoutsProps> = ({ workoutPlan, workout
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {DisplayCreatedWorkouts(workoutPlan, workoutPlanStates, dispatch)}
+                                <DisplayCreatedWorkouts workoutPlan={workoutPlan} workoutPlanStates={workoutPlanStates} dispatch={dispatch} />
                             </Tbody>
                         </Table>
                     </TableContainer>

@@ -2,7 +2,7 @@ import { Box, Text } from '@chakra-ui/react'
 import { FaTrash } from 'react-icons/fa'
 import { resetState } from '../../../State/WorkoutPlan/workoutPlanSlice'
 import { resetWorkoutPlanStates } from '../../../State/WorkoutPlan/workoutPlanStatesSlice'
-import { handleResetState } from '../../../Utils/SideBarContentUtils/WorkoutPlanPageUtils'
+import { handleResetState } from '../../../Utils/WorkoutsUtils/workoutPlanPageUtils'
 import { CustomButton } from '../../CustomComponents/CustomButton'
 import { useDispatch } from 'react-redux'
 

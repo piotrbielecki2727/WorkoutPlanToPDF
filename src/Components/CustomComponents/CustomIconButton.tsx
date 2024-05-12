@@ -6,7 +6,7 @@ import { FC, ReactElement, ReactNode } from "react"
 type Props = {
     icon: ReactElement,
     aria_label: string,
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 

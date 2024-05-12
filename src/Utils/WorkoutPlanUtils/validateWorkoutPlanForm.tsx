@@ -1,6 +1,6 @@
 import { Errors, WorkoutPlan } from "../../Types";
 
-export const ValidateWorkoutPlanForm = (formData: WorkoutPlan): Errors | null => {
+export const validateWorkoutPlanForm = (formData: WorkoutPlan): Errors | null => {
     const errors: Errors = {
         NameError: '',
         PersonError: '',
