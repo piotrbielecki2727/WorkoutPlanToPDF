@@ -7,14 +7,16 @@ type Props = {
     icon: ReactElement,
     aria_label: string,
     onClick?: () => void;
+    fontSize?: number,
 }
 
 
 
-export const CustomIconButton: FC<Props> = ({ onClick, icon, aria_label }) => {
+export const CustomIconButton: FC<Props> = ({ fontSize, onClick, icon, aria_label }) => {
     return (
         <>
             <IconButton
+                fontSize={fontSize}
                 _hover={{ bg: 'rgba(255, 255, 255, 0.0)' }}
                 onClick={onClick}
                 bg='rgba(255, 255, 255, 0.0)'

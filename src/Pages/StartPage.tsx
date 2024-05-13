@@ -1,11 +1,11 @@
-import { Box, Divider, Image, Text } from '@chakra-ui/react'
+import { Box, Divider, Image, Spacer, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import logo from '../Assets/logoNew.png';
 import { useWorkoutPlanStatesSelector } from '../Hooks/useWorkoutPlanStatesSelector';
 import { FaCalendarPlus, FaUpload } from 'react-icons/fa';
 import { CustomButton } from '../Components/CustomComponents/CustomButton';
 import { CustomModal } from '../Components/CustomComponents/CustomModal';
-import { handleOpenModal, handleCloseModal } from '../Utils/WorkoutsUtils/workoutPlanPageUtils';
+import { handleOpenModal, handleCloseModal } from '../Utils/WorkoutsUtils/handleCloseAndOpenModal';
 import startPageBg from '../Assets/startpageBg.jpg';
 import WorkoutPlanForm from '../Components/WorkoutPlan/CreateAndEditWorkoutPlan/WorkoutPlanForm';
 
@@ -29,10 +29,10 @@ export const StartPage = (props: Props) => {
                     <Text fontSize={27} textAlign='center'>Welcome to WorkoutPlanner!</Text>
                     <Box w={{ base: '290px', md: '380px' }} h={1} mt={1} mb={1} borderRadius={10} bg='#0bff00' color='white'>.</Box>
                     <Text mt={2} fontSize={20} textAlign='center'>Create personalized workout plans with ease!</Text>
+                    <Box mt={5}></Box>
                     {!workoutPlanStates.isWorkoutPlanCreated && (
                         <>
                             <CustomModal
-                                mt={5}
                                 isOpen={isModalOpen}
                                 onClose={() => handleCloseModal(setIsModalOpen)}
                                 ModalBodyContent={<WorkoutPlanForm isEditing={false} onCloseModal={() => handleCloseModal(setIsModalOpen)} />}

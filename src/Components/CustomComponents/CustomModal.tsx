@@ -12,37 +12,19 @@ import { IconType } from 'react-icons'
 import React from 'react'
 
 type Props = {
-    ModalBodyContent?: ReactNode,
+    isOpen: boolean;
     onClose: () => void;
-    isOpen: boolean,
-    HeaderText?: string,
-    ModalStyle?: string,
-    ModalHeaderStyle?: string,
-    ModalBodyStyle?: string,
-    leftIcon?: IconType,
-    mt?: number,
-    buttonText?: string,
-    size?: string,
-    w?: number,
-    maxW?: any,
-    mb?: number,
-    h?: string,
-    borderRadius?: number
-    borderRadiusHeader?: string,
-    fontSize?: any,
-    bg?: string,
-    backdropFilter?: string,
-    maxH?: string,
-    px?: number,
-    border?: string,
-    p?: number,
-    maxModalW?: any,
+    HeaderText?: string;
+    ModalBodyContent?: ReactNode;
+    size?: string;
+    maxModalW?: any;
+    border?: string;
+    h?: string;
     buttonType: React.ReactElement<typeof CustomButton>;
+};
 
-}
 
-
-export const CustomModal: FC<Props> = ({ buttonType, maxModalW, p, border, px, maxH, bg, backdropFilter, fontSize, borderRadius, borderRadiusHeader, h, w, mb, maxW, size, mt, buttonText, isOpen, onClose, ModalBodyContent, HeaderText, ModalStyle, ModalHeaderStyle, ModalBodyStyle, leftIcon }) => {
+export const CustomModal: FC<Props> = ({ buttonType, maxModalW, border, h, size, isOpen, onClose, ModalBodyContent, HeaderText}) => {
 
     return (
         <>

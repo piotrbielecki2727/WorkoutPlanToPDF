@@ -3,8 +3,9 @@ import { useWorkoutPlanSelector } from "../../Hooks/useWorkoutPlanSelector";
 import { useWorkoutPlanStatesSelector } from "../../Hooks/useWorkoutPlanStatesSelector";
 import { findWorkout } from "../../Utils/CurrentWorkoutUtils/findWorkout";
 import { AddExerciseToWorkoutModal } from "./AddExercise/AddExerciseToWorkoutModal";
-import { DisplayWorkoutPlanHeader } from "./DisplayWorkout/DisplayWorkoutPlanHeader";
-import { DisplayWorkoutTable } from "./DisplayWorkout/DisplayWorkoutTable";
+import { DisplayWorkoutPlanHeader } from "./DisplayCurrentWorkout/DisplayWorkoutPlanHeader";
+import { DisplayWorkoutTable } from "./DisplayCurrentWorkout/DisplayWorkoutTable";
+import { useDispatch } from "react-redux";
 
 
 
@@ -14,6 +15,7 @@ export const DisplayCurrentWorkout: FC = () => {
     const workoutPlan = useWorkoutPlanSelector();
     const workoutPlanStates = useWorkoutPlanStatesSelector();
     const currentWorkout = findWorkout(workoutPlanStates.CurrentWorkoutId, workoutPlan);
+    const dispatch = useDispatch()
 
 
     return (
@@ -22,7 +24,7 @@ export const DisplayCurrentWorkout: FC = () => {
 
             {currentWorkout && (
                 <>
-                    <DisplayWorkoutTable currentWorkout={currentWorkout} workoutPlan={workoutPlan} />
+                    <DisplayWorkoutTable currentWorkout={currentWorkout} workoutPlan={workoutPlan} dispatch={dispatch} />
                     <AddExerciseToWorkoutModal />
 
                 </>

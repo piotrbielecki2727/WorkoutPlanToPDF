@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
 import { CustomModal } from '../../CustomComponents/CustomModal'
-import { handleCloseModal, handleOpenModal } from '../../../Utils/WorkoutsUtils/workoutPlanPageUtils'
+import { handleCloseModal, handleOpenModal } from '../../../Utils/WorkoutsUtils/handleCloseAndOpenModal'
 import { Box } from '@chakra-ui/react'
 import { ConfirmDeleting } from './ConfirmDeleting'
 import { CustomButton } from '../../CustomComponents/CustomButton'

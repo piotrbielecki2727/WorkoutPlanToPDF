@@ -62,7 +62,7 @@ interface SidebarProps extends BoxProps {
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     return (
         <Box
-            bg='white'
+            bg='black'
             w={{ base: 'full', md: '275px', xl: '275px' }}
             pos="fixed"
             h="full"

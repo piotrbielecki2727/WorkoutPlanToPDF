@@ -18,14 +18,14 @@ export const DisplayAddExerciseForm: FC<Props> = ({ validationErrors, onFormSubm
             <form>
                 <FormControl py={2} isInvalid={!!validationErrors.NameError}>
                     <FormLabel>Exercise: </FormLabel>
-                    <Input name="Name" required type='text' value={exercise.Name} onChange={onExerciseChange} minLength={5} />
+                    <Input border='1px solid #b8b6b6' name="Name" required type='text' value={exercise.Name} onChange={onExerciseChange} minLength={5} />
                     <FormErrorMessage>{validationErrors.NameError}</FormErrorMessage>
 
                 </FormControl>
 
                 <FormControl py={2} isInvalid={!!validationErrors.MuscleError}>
                     <FormLabel>Muscle: </FormLabel>
-                    <Input name="Muscle" required type='text' value={exercise.Muscle} onChange={onExerciseChange} />
+                    <Input border='1px solid #b8b6b6' name="Muscle" required type='text' value={exercise.Muscle} onChange={onExerciseChange} />
                     <FormErrorMessage>{validationErrors.MuscleError}</FormErrorMessage>
 
                 </FormControl>
@@ -77,8 +77,8 @@ export const DisplayAddExerciseForm: FC<Props> = ({ validationErrors, onFormSubm
                     </NumberInput>
                 </FormControl>
 
-                <Box py={2} textAlign='center'>
-                    <CustomButton onClick={onFormSubmit}  size="lg" leftIcon={FaPlus} buttonText="Add new exercise"></CustomButton>
+                <Box display='flex' justifyContent='center' alignItems='center' py={2} >
+                    <CustomButton onClick={onFormSubmit} leftIcon={FaPlus} buttonText="Add new exercise"></CustomButton>
                 </Box>
 
 

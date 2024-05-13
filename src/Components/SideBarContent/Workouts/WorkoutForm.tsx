@@ -1,7 +1,7 @@
 import { Box, FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react"
 import React, { FC, useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
-import { FaSave } from "react-icons/fa";
+import { FaPlus, FaSave } from "react-icons/fa";
 import { updateWorkoutPlan } from "../../../State/WorkoutPlan/workoutPlanSlice";
 import { updateWorkoutPlanStates } from "../../../State/WorkoutPlan/workoutPlanStatesSlice";
 import { RootState } from "../../../State/store";
@@ -9,12 +9,13 @@ import { CustomButton } from "../../CustomComponents/CustomButton";
 import { validateWorkoutName } from "../../../Utils/WorkoutsUtils/validateWorkoutName";
 import { editWorkoutName } from "../../../Utils/WorkoutsUtils/editWorkoutName";
 import { createNewWorkout } from "../../../Utils/WorkoutsUtils/createNewWorkout";
+import { checkIfWorkoutAlreadyExist } from "../../../Utils/WorkoutsUtils/checkIfWorkoutAlreadyExist";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
     isEditing?: boolean,
     ActualWorkoutName?: string | undefined,
-    ActualWorkoutId?: number
+    ActualWorkoutId?: number,
 
 };
 
@@ -40,33 +41,40 @@ export const WorkoutForm: FC<Props> = ({ ActualWorkoutName, ActualWorkoutId, isE
         const formData = isEditing ? editedWorkoutName ?? '' : workoutName;
         const validationErrors = validateWorkoutName(formData);
         if (validationErrors) {
-            console.log(validationErrors);
             setErrors(validationErrors)
         }
-
         else {
             setErrors({ NameError: '' });
-            if (isEditing && ActualWorkoutId != null) {
-                editWorkoutName(workoutPlan, ActualWorkoutId, formData, dispatch, updateWorkoutPlan)
+            if (formData !== ActualWorkoutName || formData.length !== 0) {
+                const isWorkoutUnique = checkIfWorkoutAlreadyExist(workoutPlan, formData);
+                if (isWorkoutUnique) {
+                    setErrors(isWorkoutUnique);
+                }
+                else {
+                    if (isEditing && ActualWorkoutId != null) {
+                        editWorkoutName(workoutPlan, ActualWorkoutId, formData, dispatch, updateWorkoutPlan)
+                    }
+                    else {
+                        createNewWorkout(workoutPlan, workoutPlanStates, formData, dispatch, updateWorkoutPlan, updateWorkoutPlanStates)
+                    }
+                    onCloseModal();
+                }
             }
-            else {
-                createNewWorkout(workoutPlan, workoutPlanStates, formData, dispatch, updateWorkoutPlan, updateWorkoutPlanStates)
-            }
-            onCloseModal();
         }
     };
+    
 
     return (
         <form >
             <Box py={3} >
                 <FormControl isInvalid={!!errors.NameError}>
                     <FormLabel>Workout name: </FormLabel>
-                    <Input name="Name" required type='text' value={isEditing ? editedWorkoutName : workoutName} onChange={handleInputChange} />
+                    <Input border='1px solid #b8b6b6' name="Name" required type='text' value={isEditing ? editedWorkoutName : workoutName} onChange={handleInputChange} />
                     <FormErrorMessage>{errors.NameError}</FormErrorMessage>
 
                 </FormControl>
                 <Box display='flex' justifyContent='center' alignItems='center'>
-                    <CustomButton onClick={handleSubmitForm} mt={5} size="lg" fontSize={16} leftIcon={FaSave} buttonText="Edit workout name"></CustomButton>
+                    <CustomButton onClick={handleSubmitForm} mt={5} size="lg" fontSize={16} leftIcon={isEditing ? FaSave : FaPlus} buttonText={isEditing ? "Edit workout name" : "Create workout"}></CustomButton>
                 </Box>
             </Box>
 

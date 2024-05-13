@@ -1,11 +1,13 @@
+import { checkIfWorkoutAlreadyExist } from "./checkIfWorkoutAlreadyExist";
+import { checkIfWorkoutsExist } from "./checkIfWorkoutsExist";
+
 export const validateWorkoutName = (formData: string) => {
 
     const errors = {
         NameError: '',
     };
 
-
-    if (formData.length < 1) {
+    if (!formData.trim()) {
         errors.NameError = 'Workout name cannot be empty';
     } else if (formData.length > 30) {
         errors.NameError = 'Workout name cannot be longer than 30 characters';

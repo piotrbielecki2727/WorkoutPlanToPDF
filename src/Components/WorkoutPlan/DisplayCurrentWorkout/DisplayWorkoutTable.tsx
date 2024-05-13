@@ -1,16 +1,17 @@
 import { Card, CardBody, CardHeader, Flex, Table, TableContainer, Tbody, Text, Thead, Tr } from "@chakra-ui/react";
 import { Workout, WorkoutPlan } from "../../../Types";
-import { displayWorkoutData } from "../../../Utils/CurrentWorkoutUtils/displayWorkoutData";
-import { displayTableHeaders } from "../../../Utils/CurrentWorkoutUtils/displayTableHeaders";
+import { DisplayWorkoutData } from "./DisplayWorkoutData";
+import { DisplayTableHeaders } from "./DisplayTableHeaders";
 import { FC } from "react";
 
 interface Props {
     workoutPlan: WorkoutPlan;
     currentWorkout: Workout;
+    dispatch: Function,
 }
 
 
-export const DisplayWorkoutTable: FC<Props> = ({ workoutPlan, currentWorkout }) => {
+export const DisplayWorkoutTable: FC<Props> = ({ workoutPlan, currentWorkout, dispatch }) => {
 
 
     return (
@@ -24,12 +25,12 @@ export const DisplayWorkoutTable: FC<Props> = ({ workoutPlan, currentWorkout }) 
                         <TableContainer overflowY='auto' >
                             <Table variant='striped' size='sm' colorScheme="blackAlpha" >
                                 <Thead bg='black' borderBottom='1px solid black' borderTop='0px' >
-                                    {displayTableHeaders()}
+                                    <DisplayTableHeaders />
                                     <Tr>
                                     </Tr>
                                 </Thead>
                                 <Tbody>
-                                    {displayWorkoutData(currentWorkout)}
+                                    <DisplayWorkoutData currentWorkout={currentWorkout} dispatch={dispatch} />
                                 </Tbody>
                             </Table>
                         </TableContainer>

@@ -26,15 +26,15 @@ export const DisplayWorkouts: FC<DisplayWorkoutsProps> = ({ workoutPlan, workout
 
     return (
         <>
-            <Card border='1px solid #363636' borderRadius={0} maxW={250} mt={5}>
+            <Card border='1px solid #363636' borderRadius={0} w='250px' mt={5}>
                 <CardHeader p={3} borderBottom='1px solid #363636' textAlign='center' fontSize={18} bg='black' color='white'  >
                     <Text color='#0bff00'>Workouts</Text>
                 </CardHeader>
                 <CardBody>
-                    <TableContainer bg='white' w={230} maxHeight="220px" overflowY='auto' whiteSpace='wrap' textOverflow='ellipsis' >
-                        <Table size='sm' variant='striped' >
+                    <TableContainer bg='#d7f7e1' maxHeight="220px" overflowY='auto' whiteSpace='wrap' textOverflow='ellipsis' >
+                        <Table colorScheme="green" size='sm' variant='striped'  >
                             <Thead textAlign='center' bg='black' >
-                                <Tr>
+                                <Tr >
                                     <Th fontFamily='Righteous' borderRight='1px solid #363636' fontWeight='100' textAlign='center' color='white'>Name</Th>
                                     <Th fontFamily='Righteous' fontWeight='100' textAlign='center' color='white'>Action</Th>
                                 </Tr>

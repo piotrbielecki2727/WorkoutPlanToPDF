@@ -19,21 +19,16 @@ type Props = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButt
     ml?: number,
     fontSize?: number | any,
     px?: number,
-    py?: number,
-
 }
 
-
-
-export const CustomButton: FC<Props> = ({ py, px, type, fontSize, mb, ml, w, maxW, mt, bg, color, p, className, onClick, buttonText, size, leftIcon, variant }) => {
+export const CustomButton: FC<Props> = ({ px, mb, ml, w, maxW, mt, bg, color, p, className, onClick, buttonText, size, leftIcon, variant }) => {
     const LeftIcon = leftIcon;
 
     return (
         <>
-            <Button py={{ base: 3, md: 6 }} type={type} px={px} fontSize={{ base: 13, md: 16 }} mb={mb} w={w} maxW={maxW} mt={mt} bg={bg} color={color} p={p} colorScheme='none' variant={variant} className='ButtonStyle' onClick={onClick} size={size} leftIcon={leftIcon ? <Icon ml={ml} color='#0bff00' as={LeftIcon} /> : undefined}>
-                <Text>{buttonText}</Text>
+            <Button py={{ base: 3, md: 6 }} px={px} fontSize={{ base: 13, md: 16 }} mb={mb} w={w} maxW={maxW} mt={mt} bg={bg} color={color} p={p} whiteSpace='normal' colorScheme='none' variant={variant} className='ButtonStyle' onClick={onClick} size={size} leftIcon={leftIcon ? <Icon fontSize='17px' color='#0bff00' as={LeftIcon} /> : undefined}>
+                <Text >{buttonText}</Text>
             </Button>
         </>
     )
 }
-

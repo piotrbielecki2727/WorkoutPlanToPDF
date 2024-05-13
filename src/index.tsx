@@ -6,6 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { Provider } from 'react-redux';
 import { store } from './State/store';
 import { BrowserRouter, Router } from 'react-router-dom';
+import './styles.css';
 import './index.css';
 
 const root = ReactDOM.createRoot(
