@@ -1,4 +1,3 @@
-
 import MainApplication from './Components/MainApplication';
 import { useWorkoutPlanStatesSelector } from './Hooks/useWorkoutPlanStatesSelector';
 import { StartPage } from './Pages/StartPage';

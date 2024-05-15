@@ -1,5 +1,4 @@
-import { Table, TableContainer, Thead, Tr, Th, Tbody, Card, CardHeader, Text } from "@chakra-ui/react"
-import { CardBody } from "react-bootstrap";
+import { Table, TableContainer, Thead, Tr, Th, Tbody, Card, CardHeader, CardBody, Text } from "@chakra-ui/react"
 import { WorkoutPlan, WorkoutPlanStatesTypes } from "../../../Types";
 import { useDispatch } from "react-redux";
 import { updateWorkoutPlanStates } from "../../../State/WorkoutPlan/workoutPlanStatesSlice";

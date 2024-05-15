@@ -1,0 +1,11 @@
+.InputInput:focus,
+.InputInput:active {
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent;
+
+
+}

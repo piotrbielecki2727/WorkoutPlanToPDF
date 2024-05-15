@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Exercise, ExerciseErrors } from '../../../Types';
-import { FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, Box } from '@chakra-ui/react';
+import { FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, Box, SimpleGrid, Checkbox, CheckboxGroup, Stack, Button, Menu, MenuButton, MenuItem, MenuList, Grid, GridItem, Text } from '@chakra-ui/react';
 import { CustomButton } from '../../CustomComponents/CustomButton';
-import { FaPlus } from 'react-icons/fa';
+import { FaBoxOpen, FaFilter, FaPlus } from 'react-icons/fa';
+import { FilterExercises } from './FilterExercises';
+import { SearchResults } from './SearchResults';
 
 interface Props {
     exercise: Exercise;
@@ -13,24 +15,22 @@ interface Props {
 }
 
 export const DisplayAddExerciseForm: FC<Props> = ({ validationErrors, onFormSubmit, exercise, onExerciseChange, onSetChange }) => {
+
+    const [choosedBodyPart, setChoosedBodyPart] = useState<string>('');
+
     return (
         <>
             <form>
+
                 <FormControl py={2} isInvalid={!!validationErrors.NameError}>
                     <FormLabel>Exercise: </FormLabel>
-                    <Input border='1px solid #b8b6b6' name="Name" required type='text' value={exercise.Name} onChange={onExerciseChange} minLength={5} />
+                    <FilterExercises choosedBodyPart={choosedBodyPart} setChoosedBodyPart={setChoosedBodyPart} />
+                    <Input placeholder='Type to search...' border='1px solid #b8b6b6' borderRadius='5px 10px 0px 0px' name="Name" required type='text' value={exercise.Name} onChange={onExerciseChange} minLength={5} />
+            
+                        <SearchResults choosedBodyPart={choosedBodyPart} searchValue={exercise.Name} />
+      
                     <FormErrorMessage>{validationErrors.NameError}</FormErrorMessage>
-
                 </FormControl>
-
-                <FormControl py={2} isInvalid={!!validationErrors.MuscleError}>
-                    <FormLabel>Muscle: </FormLabel>
-                    <Input border='1px solid #b8b6b6' name="Muscle" required type='text' value={exercise.Muscle} onChange={onExerciseChange} />
-                    <FormErrorMessage>{validationErrors.MuscleError}</FormErrorMessage>
-
-                </FormControl>
-
-
 
                 <FormControl py={2} >
                     <FormLabel>Sets: </FormLabel>
