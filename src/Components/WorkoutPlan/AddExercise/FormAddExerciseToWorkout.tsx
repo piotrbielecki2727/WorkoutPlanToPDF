@@ -19,6 +19,7 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
     const dispatch = useDispatch();
     const workoutPlanStates = useWorkoutPlanStatesSelector();
     const currentWorkout = findWorkout(workoutPlanStates.CurrentWorkoutId, workoutPlan);
+    const [choosedExercise, setChoosedExercise] = useState<string>();
 
     const [exercise, setExercise] = useState<Exercise>({
         Id: 0,
@@ -86,6 +87,8 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
             onSetChange={handleInputSetChange}
             onFormSubmit={handleSubmitForm}
             validationErrors={errors}
+            choosedExercise={choosedExercise}
+            setChoosedExercise={setChoosedExercise}
         />
 
     )

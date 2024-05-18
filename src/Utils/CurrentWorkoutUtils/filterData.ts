@@ -1,4 +1,4 @@
-export const filterData = (data: any[], choosedBodyPart: string | undefined, searchValue: string | undefined) => {
+export const filterData = (data: any[], choosedBodyPart: string, searchValue: string) => {
     const formattedChoosedBodyPart = choosedBodyPart?.toLowerCase();
     const formattedSearchValue = searchValue?.toLowerCase();
 

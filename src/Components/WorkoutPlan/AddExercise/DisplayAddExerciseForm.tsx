@@ -2,8 +2,8 @@ import React, { FC, useState } from 'react';
 import { Exercise, ExerciseErrors } from '../../../Types';
 import { FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, Box, SimpleGrid, Checkbox, CheckboxGroup, Stack, Button, Menu, MenuButton, MenuItem, MenuList, Grid, GridItem, Text } from '@chakra-ui/react';
 import { CustomButton } from '../../CustomComponents/CustomButton';
-import { FaBoxOpen, FaFilter, FaPlus } from 'react-icons/fa';
-import { FilterExercises } from './FilterExercises';
+import { FaPlus } from 'react-icons/fa';
+import { BodyPartFiltering } from './BodyPartFiltering';
 import { SearchResults } from './SearchResults';
 
 interface Props {
@@ -12,11 +12,15 @@ interface Props {
     onSetChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onFormSubmit: () => void;
     validationErrors: ExerciseErrors,
+    choosedExercise: string | undefined,
+    setChoosedExercise: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const DisplayAddExerciseForm: FC<Props> = ({ validationErrors, onFormSubmit, exercise, onExerciseChange, onSetChange }) => {
+export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedExercise, validationErrors, onFormSubmit, exercise, onExerciseChange, onSetChange }) => {
 
     const [choosedBodyPart, setChoosedBodyPart] = useState<string>('');
+    const [apiData, setApiData] = useState<any[]>([]);
+
 
     return (
         <>
@@ -24,11 +28,9 @@ export const DisplayAddExerciseForm: FC<Props> = ({ validationErrors, onFormSubm
 
                 <FormControl py={2} isInvalid={!!validationErrors.NameError}>
                     <FormLabel>Exercise: </FormLabel>
-                    <FilterExercises choosedBodyPart={choosedBodyPart} setChoosedBodyPart={setChoosedBodyPart} />
+                    <BodyPartFiltering apiData={apiData} choosedBodyPart={choosedBodyPart} setChoosedBodyPart={setChoosedBodyPart} />
                     <Input placeholder='Type to search...' border='1px solid #b8b6b6' borderRadius='5px 10px 0px 0px' name="Name" required type='text' value={exercise.Name} onChange={onExerciseChange} minLength={5} />
-            
-                        <SearchResults choosedBodyPart={choosedBodyPart} searchValue={exercise.Name} />
-      
+                    <SearchResults choosedExercise={choosedExercise} setChoosedExercise={setChoosedExercise} apiData={apiData} setApiData={setApiData} choosedBodyPart={choosedBodyPart} searchValue={exercise.Name} />
                     <FormErrorMessage>{validationErrors.NameError}</FormErrorMessage>
                 </FormControl>
 

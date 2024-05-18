@@ -11,6 +11,7 @@ import { CustomButton } from '../../CustomComponents/CustomButton'
 export const AddExerciseToWorkoutModal = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    
 
     return (
         <Box display='flex' justifyContent='center' alignItems='center'>
