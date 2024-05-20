@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Exercise, ExerciseErrors } from '../../../Types';
+import { ChoosedExercise, Exercise, ExerciseErrors } from '../../../Types';
 import { FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, Box, SimpleGrid, Checkbox, CheckboxGroup, Stack, Button, Menu, MenuButton, MenuItem, MenuList, Grid, GridItem, Text } from '@chakra-ui/react';
 import { CustomButton } from '../../CustomComponents/CustomButton';
 import { FaPlus } from 'react-icons/fa';
@@ -8,18 +8,19 @@ import { SearchResults } from './SearchResults';
 
 interface Props {
     exercise: Exercise;
-    onExerciseChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onSetChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onFormSubmit: () => void;
     validationErrors: ExerciseErrors,
-    choosedExercise: string | undefined,
-    setChoosedExercise: React.Dispatch<React.SetStateAction<string>>;
+    choosedExercise: ChoosedExercise | undefined,
+    setChoosedExercise: React.Dispatch<React.SetStateAction<ChoosedExercise | undefined>>;
 }
 
-export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedExercise, validationErrors, onFormSubmit, exercise, onExerciseChange, onSetChange }) => {
+export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedExercise, validationErrors, onFormSubmit, exercise, onSetChange }) => {
 
     const [choosedBodyPart, setChoosedBodyPart] = useState<string>('');
     const [apiData, setApiData] = useState<any[]>([]);
+    const [isFocused, setIsFocused] = useState<boolean>(false);
+    const [searchValue, setSearchValue] = useState<string>('');
 
 
     return (
@@ -27,10 +28,25 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
             <form>
 
                 <FormControl py={2} isInvalid={!!validationErrors.NameError}>
-                    <FormLabel>Exercise: </FormLabel>
+                    <FormLabel>Search for exercise: </FormLabel>
                     <BodyPartFiltering apiData={apiData} choosedBodyPart={choosedBodyPart} setChoosedBodyPart={setChoosedBodyPart} />
-                    <Input placeholder='Type to search...' border='1px solid #b8b6b6' borderRadius='5px 10px 0px 0px' name="Name" required type='text' value={exercise.Name} onChange={onExerciseChange} minLength={5} />
-                    <SearchResults choosedExercise={choosedExercise} setChoosedExercise={setChoosedExercise} apiData={apiData} setApiData={setApiData} choosedBodyPart={choosedBodyPart} searchValue={exercise.Name} />
+                    <Input onFocus={() => setIsFocused(true)} placeholder='Type to search...' border='1px solid #b8b6b6' borderRadius='10px 10px 0px 0px' name="Name" required type='text' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} minLength={5} />
+                    <SearchResults
+                        choosedExercise={choosedExercise}
+                        setChoosedExercise={setChoosedExercise}
+                        apiData={apiData}
+                        setApiData={setApiData}
+                        choosedBodyPart={choosedBodyPart}
+                        searchValue={searchValue}
+                        isFocused={isFocused}
+                        setIsFocused={setIsFocused}
+                    />
+                    {choosedExercise &&
+                        <> <Text py={2}>Choosed Exercise:</Text> <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>{choosedExercise.exerciseName}</Box>
+                            <Text py={2}>Target muscle:</Text> <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>{choosedExercise.bodyPart}{choosedExercise.id}</Box>
+                        </>}
+
+
                     <FormErrorMessage>{validationErrors.NameError}</FormErrorMessage>
                 </FormControl>
 

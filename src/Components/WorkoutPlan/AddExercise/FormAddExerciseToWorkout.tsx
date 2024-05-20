@@ -1,11 +1,11 @@
-import React, { FC, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { RootState } from "../../../State/store";
 import { updateWorkoutPlan } from "../../../State/WorkoutPlan/workoutPlanSlice";
 import { findWorkout } from "../../../Utils/CurrentWorkoutUtils/findWorkout";
 import { useWorkoutPlanStatesSelector } from "../../../Hooks/useWorkoutPlanStatesSelector";
 import { DisplayAddExerciseForm } from "./DisplayAddExerciseForm";
-import { Exercise, ExerciseErrors } from "../../../Types";
+import { ChoosedExercise, Exercise, ExerciseErrors } from "../../../Types";
 import { validateNewExercise } from "../../../Utils/CurrentWorkoutUtils/validateNewExercise";
 
 interface Props extends PropsFromRedux {
@@ -19,7 +19,7 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
     const dispatch = useDispatch();
     const workoutPlanStates = useWorkoutPlanStatesSelector();
     const currentWorkout = findWorkout(workoutPlanStates.CurrentWorkoutId, workoutPlan);
-    const [choosedExercise, setChoosedExercise] = useState<string>();
+    const [choosedExercise, setChoosedExercise] = useState<ChoosedExercise>();
 
     const [exercise, setExercise] = useState<Exercise>({
         Id: 0,
@@ -39,10 +39,22 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
         MuscleError: '',
     });
 
-    const handleInputExerciseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setExercise({ ...exercise, [name]: value });
-    }
+    useEffect(() => {
+        if (choosedExercise) {
+            setExercise({
+                ...exercise,
+                Id: choosedExercise.id,
+                Name: choosedExercise.exerciseName,
+                Muscle: choosedExercise.bodyPart,
+                Sets: {
+                    ...exercise.Sets,
+
+                }
+            });
+        }
+    }, [choosedExercise])
+
+
 
     const handleInputSetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -83,7 +95,6 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
     return (
         <DisplayAddExerciseForm
             exercise={exercise}
-            onExerciseChange={handleInputExerciseChange}
             onSetChange={handleInputSetChange}
             onFormSubmit={handleSubmitForm}
             validationErrors={errors}

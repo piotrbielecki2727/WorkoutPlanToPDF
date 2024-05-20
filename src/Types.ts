@@ -47,3 +47,9 @@ export type WorkoutPlanStatesTypes = {
     doWorkoutsExist: boolean,
     CurrentWorkoutId: number,
 }
+
+export type ChoosedExercise = {
+    id: number,
+    exerciseName: string,
+    bodyPart: string,
+}

@@ -4,22 +4,31 @@ import { getExercises } from "../../../Api/getExercises";
 import { getAllExercisesURL } from "./ApiUrls";
 import { filterData } from "../../../Utils/CurrentWorkoutUtils/filterData";
 import React from "react";
+import { ChoosedExercise, Exercise } from "../../../Types";
+
+
+
+
 
 interface Props {
     choosedBodyPart: string,
     searchValue: string,
     apiData: any,
     setApiData: any,
-    choosedExercise: string | undefined,
-    setChoosedExercise: React.Dispatch<React.SetStateAction<string>>;
+    choosedExercise: ChoosedExercise | undefined,
+    setChoosedExercise: React.Dispatch<React.SetStateAction<ChoosedExercise | undefined>>;
+    isFocused: boolean,
+    setIsFocused: React.Dispatch<React.SetStateAction<boolean>>;
+
 
 }
 
 
 
-export const SearchResults: FC<Props> = ({ choosedExercise, setChoosedExercise, apiData, setApiData, choosedBodyPart, searchValue }) => {
+export const SearchResults: FC<Props> = ({ isFocused, setIsFocused, choosedExercise, setChoosedExercise, apiData, setApiData, choosedBodyPart, searchValue }) => {
 
     const [searchResults, setSearchResults] = useState<any[]>([])
+
 
     useEffect(() => {
         const fetchAndFilterExercises = async () => {
@@ -45,16 +54,25 @@ export const SearchResults: FC<Props> = ({ choosedExercise, setChoosedExercise, 
     }, [apiData, choosedBodyPart, searchValue]);
 
 
+    const handleClickOnSearch = (choosedValue: ChoosedExercise) => {
+        setIsFocused(false);
+        setChoosedExercise(choosedValue);
+    }
+
+
 
     return (
-        <Box border='1px solid #B8B6B6' borderTop={0} borderRadius='0px 0px 5px 5px' px={4} py={2} overflowY="auto" maxHeight="300px">
-            <List>
-                {searchResults.map((exercise, index) => (
-                    <ListItem key={index} onClick={() => setChoosedExercise(exercise.name)}>
-                        <Text>{exercise.name}</Text>
-                    </ListItem>
-                ))}
-            </List>
-        </Box>
+        isFocused ? (
+            <Box border='1px solid #B8B6B6' borderTop={0} borderRadius='0px 0px 5px 5px' px={4} py={2} overflowY="auto" maxHeight="300px">
+                <List>
+                    {searchResults.map((exercise, index) => (
+                        <ListItem key={index} onClick={() => handleClickOnSearch({ id: exercise.id, exerciseName: exercise.name, bodyPart: exercise.bodyPart })}>
+                            <Text>{exercise.name}</Text>
+                        </ListItem>
+                    ))}
+                </List>
+            </Box>
+        ) : (null)
+
     )
 }

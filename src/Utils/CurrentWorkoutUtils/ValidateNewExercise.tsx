@@ -1,4 +1,4 @@
-import { Exercise, ExerciseErrors } from "../../Types"
+import { ChoosedExercise, Exercise, ExerciseErrors } from "../../Types"
 
 export const validateNewExercise = (exercise: Exercise): ExerciseErrors | null => {
 
