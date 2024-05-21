@@ -8,7 +8,7 @@ import { SearchResults } from './SearchResults';
 
 interface Props {
     exercise: Exercise;
-    onSetChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onSetChange: (name: string, valueAsNumber: number) => void;
     onFormSubmit: () => void;
     validationErrors: ExerciseErrors,
     choosedExercise: ChoosedExercise | undefined,
@@ -43,7 +43,7 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
                     />
                     {choosedExercise &&
                         <> <Text py={2}>Choosed Exercise:</Text> <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>{choosedExercise.exerciseName}</Box>
-                            <Text py={2}>Target muscle:</Text> <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>{choosedExercise.bodyPart}{choosedExercise.id}</Box>
+                            <Text py={2}>Target muscle:</Text> <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>{choosedExercise.bodyPart}</Box>
                         </>}
 
 
@@ -52,9 +52,9 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
 
                 <FormControl py={2} >
                     <FormLabel>Sets: </FormLabel>
-                    <NumberInput min={1} defaultValue={1}>
-                        <NumberInputField name="Sets" onChange={onSetChange} value={exercise.Sets.Sets} />
-                        <NumberInputStepper>
+                    <NumberInput min={1} defaultValue={1} name="Sets" onChange={(name, valueAsNumber) => onSetChange('Sets', valueAsNumber)} value={exercise.Sets.Sets}>
+                        <NumberInputField />
+                        <NumberInputStepper >
                             <NumberIncrementStepper />
                             <NumberDecrementStepper />
                         </NumberInputStepper>
@@ -64,8 +64,8 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
 
                 <FormControl py={2} >
                     <FormLabel>Reps: </FormLabel>
-                    <NumberInput defaultValue={5} min={1} max={150}>
-                        <NumberInputField name="Reps" onChange={onSetChange} value={exercise.Sets.Reps} />
+                    <NumberInput defaultValue={5} min={1} max={150} name="Reps" onChange={(name, valueAsNumber) => onSetChange('Reps', valueAsNumber)} value={exercise.Sets.Reps}>
+                        <NumberInputField />
                         <NumberInputStepper>
                             <NumberIncrementStepper />
                             <NumberDecrementStepper />
@@ -75,8 +75,8 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
 
                 <FormControl py={2} >
                     <FormLabel>Weight: </FormLabel>
-                    <NumberInput defaultValue={0} min={0} >
-                        <NumberInputField name="Weight" onChange={onSetChange} value={exercise.Sets.Weight} />
+                    <NumberInput defaultValue={0} min={0} name="Weight" onChange={(name, valueAsNumber) => onSetChange('Weight', valueAsNumber)} value={exercise.Sets.Weight} >
+                        <NumberInputField />
                         <NumberInputStepper>
                             <NumberIncrementStepper />
                             <NumberDecrementStepper />
@@ -86,8 +86,8 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
 
                 <FormControl py={2} >
                     <FormLabel>Rest: </FormLabel>
-                    <NumberInput defaultValue={3} min={1} >
-                        <NumberInputField name="Rest" onChange={onSetChange} value={exercise.Sets.Rest} />
+                    <NumberInput defaultValue={3} min={1} name="Rest" onChange={(name, valueAsNumber) => onSetChange('Rest', valueAsNumber)} value={exercise.Sets.Rest} >
+                        <NumberInputField />
                         <NumberInputStepper>
                             <NumberIncrementStepper />
                             <NumberDecrementStepper />

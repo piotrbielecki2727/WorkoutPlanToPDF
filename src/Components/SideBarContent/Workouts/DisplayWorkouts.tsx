@@ -29,7 +29,7 @@ export const DisplayWorkouts: FC<DisplayWorkoutsProps> = ({ workoutPlan, workout
                 <CardHeader p={3} borderBottom='1px solid #363636' textAlign='center' fontSize={18} bg='black' color='white'  >
                     <Text color='#0bff00'>Workouts</Text>
                 </CardHeader>
-                <CardBody>
+                <CardBody p={0}>
                     <TableContainer bg='#d7f7e1' maxHeight="220px" overflowY='auto' whiteSpace='wrap' textOverflow='ellipsis' >
                         <Table colorScheme="green" size='sm' variant='striped'  >
                             <Thead textAlign='center' bg='black' >

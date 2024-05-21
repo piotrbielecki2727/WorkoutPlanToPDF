@@ -49,7 +49,7 @@ export type WorkoutPlanStatesTypes = {
 }
 
 export type ChoosedExercise = {
-    id: number,
+    id: string,
     exerciseName: string,
     bodyPart: string,
 }

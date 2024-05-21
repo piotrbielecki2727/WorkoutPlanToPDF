@@ -4,7 +4,7 @@ import { getExercises } from "../../../Api/getExercises";
 import { getAllExercisesURL } from "./ApiUrls";
 import { filterData } from "../../../Utils/CurrentWorkoutUtils/filterData";
 import React from "react";
-import { ChoosedExercise, Exercise } from "../../../Types";
+import { ChoosedExercise } from "../../../Types";
 
 
 

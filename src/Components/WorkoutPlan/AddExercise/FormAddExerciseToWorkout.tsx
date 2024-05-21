@@ -7,6 +7,7 @@ import { useWorkoutPlanStatesSelector } from "../../../Hooks/useWorkoutPlanState
 import { DisplayAddExerciseForm } from "./DisplayAddExerciseForm";
 import { ChoosedExercise, Exercise, ExerciseErrors } from "../../../Types";
 import { validateNewExercise } from "../../../Utils/CurrentWorkoutUtils/validateNewExercise";
+import { checkIfExerciseIsInWorkout } from "../../../Utils/CurrentWorkoutUtils/checkIfExerciseIsInWorkout";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
@@ -43,26 +44,21 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
         if (choosedExercise) {
             setExercise({
                 ...exercise,
-                Id: choosedExercise.id,
+                Id: parseInt(choosedExercise.id),
                 Name: choosedExercise.exerciseName,
                 Muscle: choosedExercise.bodyPart,
-                Sets: {
-                    ...exercise.Sets,
-
-                }
             });
         }
     }, [choosedExercise])
 
 
 
-    const handleInputSetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+    const handleInputSetChange = (name: string, valueAsNumber: number) => {
         setExercise(prevExercise => ({
             ...prevExercise,
             Sets: {
                 ...prevExercise.Sets,
-                [name]: parseFloat(value)
+                [name]: valueAsNumber
             }
         }));
     };
@@ -72,6 +68,9 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
         if (validationErrors) {
             setErrors(validationErrors);
         }
+        const checkIfExerciseExist = checkIfExerciseIsInWorkout(workoutPlan, exercise.Id);
+        if(checkIfExerciseExist) 
+            setErrors(checkIfExerciseExist);
         else {
             setErrors({ NameError: '', MuscleError: '' });
             const updatedWorkoutList = workoutPlan.Workouts.map((w) => {
