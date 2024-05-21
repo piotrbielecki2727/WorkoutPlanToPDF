@@ -5,6 +5,7 @@ import { getAllExercisesURL } from "./ApiUrls";
 import { filterData } from "../../../Utils/CurrentWorkoutUtils/filterData";
 import React from "react";
 import { ChoosedExercise } from "../../../Types";
+import { exerciseNamesToUpperCase } from "../../../Utils/CurrentWorkoutUtils/exerciseNamesToUpperCase";
 
 
 
@@ -35,7 +36,8 @@ export const SearchResults: FC<Props> = ({ isFocused, setIsFocused, choosedExerc
             try {
                 const exercisesData = await getExercises(getAllExercisesURL);
                 if (exercisesData) {
-                    setApiData(exercisesData);
+                    const formattedData = exerciseNamesToUpperCase(exercisesData);
+                    setApiData(formattedData);
                 } else {
                     console.log('Error while fetching the data');
                 }

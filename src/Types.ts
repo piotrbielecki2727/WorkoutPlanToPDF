@@ -53,3 +53,14 @@ export type ChoosedExercise = {
     exerciseName: string,
     bodyPart: string,
 }
+
+export type FetchedExercise = {
+    bodyPart: string,
+    equipment: string
+    gifUrl: string,
+    id: number,
+    name: string,
+    target: string,
+    secondaryMuscles: string[],
+    instructions: string[],
+}

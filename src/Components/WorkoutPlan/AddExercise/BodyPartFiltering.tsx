@@ -33,12 +33,13 @@ export const BodyPartFiltering: FC<Props> = ({ apiData, choosedBodyPart, setChoo
             <MenuButton bg='gray.300' mb={3} fontWeight={100} as={Button} leftIcon={<FaFilter />}>
                 Filter by muscle
             </MenuButton >
-            <MenuList display='flex' flexDirection='column'>
+            <MenuList p={3} display='flex' flexDirection='column'>
                 {uniqueBodyParts.map((bodyPart: string) => (
                     <Checkbox
                         key={bodyPart}
                         isChecked={choosedBodyPart === bodyPart}
                         onChange={() => onCheck(bodyPart)}
+                        colorScheme="green"
                     >
                         {bodyPart}
                     </Checkbox>
