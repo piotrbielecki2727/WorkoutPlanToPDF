@@ -25,8 +25,8 @@ export const DisplayWorkoutTable: FC<Props> = ({ workoutPlan, currentWorkout, di
                         <TableContainer overflowY='auto' >
                             <Table variant='striped' size='sm' colorScheme="blackAlpha" >
                                 <Thead bg='black' borderBottom='1px solid black' borderTop='0px' >
+                                <Tr>
                                     <DisplayTableHeaders />
-                                    <Tr>
                                     </Tr>
                                 </Thead>
                                 <Tbody>

@@ -5,6 +5,7 @@ import { deleteChoosedExercise } from "../../../Utils/CurrentWorkoutUtils/delete
 import { FaTrash } from "react-icons/fa";
 import { FC } from "react";
 import { CustomIconButton } from "../../CustomComponents/CustomIconButton";
+import { capitalizeFirstLetter } from "../../../Utils/CurrentWorkoutUtils/capitalizeFirstLetter";
 
 interface Props {
     currentWorkout: Workout,
@@ -16,7 +17,7 @@ export const DisplayWorkoutData: FC<Props> = ({ currentWorkout, dispatch }) => {
     return (
         <>
             {currentWorkout.Exercises.map((exercise, exerciseIndex) => {
-                const tableDataCells = [exercise.Name, exercise.Muscle, exercise.Sets.Sets, exercise.Sets.Reps, exercise.Sets.Weight, exercise.Sets.Rest];
+                const tableDataCells = [capitalizeFirstLetter(exercise.Name), capitalizeFirstLetter(exercise.Muscle), exercise.Sets.Sets, exercise.Sets.Reps, exercise.Sets.Weight, exercise.Sets.Rest];
                 return (
                     <Tr key={`${exerciseIndex}`}>
                         <Td textAlign='center' fontSize={18} borderRight='1px solid #363636 !important' borderBottom='1px solid #363636 !important'>{exerciseIndex + 1}</Td>

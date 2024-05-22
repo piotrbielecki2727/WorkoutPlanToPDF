@@ -5,6 +5,7 @@ import { CustomButton } from '../../CustomComponents/CustomButton';
 import { FaPlus } from 'react-icons/fa';
 import { BodyPartFiltering } from './BodyPartFiltering';
 import { SearchResults } from './SearchResults';
+import { capitalizeFirstLetter } from '../../../Utils/CurrentWorkoutUtils/capitalizeFirstLetter';
 
 interface Props {
     exercise: Exercise;
@@ -42,8 +43,8 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
                         setIsFocused={setIsFocused}
                     />
                     {choosedExercise &&
-                        <> <Text py={2}>Choosed Exercise:</Text> <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>{choosedExercise.exerciseName}</Box>
-                            <Text py={2}>Target muscle:</Text> <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>{choosedExercise.bodyPart}</Box>
+                        <> <Text py={2}>Choosed Exercise:</Text> <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>{capitalizeFirstLetter(choosedExercise.exerciseName)}</Box>
+                            <Text py={2}>Target muscle:</Text> <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>{capitalizeFirstLetter(choosedExercise.bodyPart)}</Box>
                         </>}
 
 

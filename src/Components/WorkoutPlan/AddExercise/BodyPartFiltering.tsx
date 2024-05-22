@@ -1,6 +1,7 @@
 import { Menu, MenuButton, MenuList, Checkbox, Button } from "@chakra-ui/react"
 import { FC } from "react";
 import { FaFilter } from "react-icons/fa"
+import { capitalizeFirstLetter } from "../../../Utils/CurrentWorkoutUtils/capitalizeFirstLetter";
 
 
 interface Props {
@@ -41,7 +42,7 @@ export const BodyPartFiltering: FC<Props> = ({ apiData, choosedBodyPart, setChoo
                         onChange={() => onCheck(bodyPart)}
                         colorScheme="green"
                     >
-                        {bodyPart}
+                        {capitalizeFirstLetter(bodyPart)}
                     </Checkbox>
                 ))}
             </MenuList>

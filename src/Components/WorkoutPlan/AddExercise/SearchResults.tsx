@@ -1,11 +1,14 @@
 import { Box, List, ListItem, Select, Text, UnorderedList } from "@chakra-ui/react"
-import { FC, useEffect, useState } from "react"
+import { FC, useEffect, useRef, useState } from "react"
 import { getExercises } from "../../../Api/getExercises";
 import { getAllExercisesURL } from "./ApiUrls";
 import { filterData } from "../../../Utils/CurrentWorkoutUtils/filterData";
 import React from "react";
-import { ChoosedExercise } from "../../../Types";
-import { exerciseNamesToUpperCase } from "../../../Utils/CurrentWorkoutUtils/exerciseNamesToUpperCase";
+import { ChoosedExercise, FetchedExercise } from "../../../Types";
+import { capitalizeFirstLetter } from "../../../Utils/CurrentWorkoutUtils/capitalizeFirstLetter";
+import useClickOutside from "../../../Hooks/useClickOutside";
+import { useFetchExercises } from "../../../Hooks/useFetchExercises";
+import { useFilterData } from "../../../Hooks/useFilterData";
 
 
 
@@ -14,8 +17,8 @@ import { exerciseNamesToUpperCase } from "../../../Utils/CurrentWorkoutUtils/exe
 interface Props {
     choosedBodyPart: string,
     searchValue: string,
-    apiData: any,
-    setApiData: any,
+    apiData: FetchedExercise[],
+    setApiData: React.Dispatch<React.SetStateAction<FetchedExercise[]>>
     choosedExercise: ChoosedExercise | undefined,
     setChoosedExercise: React.Dispatch<React.SetStateAction<ChoosedExercise | undefined>>;
     isFocused: boolean,
@@ -28,32 +31,12 @@ interface Props {
 
 export const SearchResults: FC<Props> = ({ isFocused, setIsFocused, choosedExercise, setChoosedExercise, apiData, setApiData, choosedBodyPart, searchValue }) => {
 
-    const [searchResults, setSearchResults] = useState<any[]>([])
+    const [searchResults, setSearchResults] = useState<FetchedExercise[]>([])
+    const boxRef = useRef<HTMLDivElement>(null);
 
+    useFetchExercises(setApiData);
 
-    useEffect(() => {
-        const fetchAndFilterExercises = async () => {
-            try {
-                const exercisesData = await getExercises(getAllExercisesURL);
-                if (exercisesData) {
-                    const formattedData = exerciseNamesToUpperCase(exercisesData);
-                    setApiData(formattedData);
-                } else {
-                    console.log('Error while fetching the data');
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchAndFilterExercises();
-    }, []);
-
-    useEffect(() => {
-        if (apiData.length > 0) {
-            const filteredData = filterData(apiData, choosedBodyPart, searchValue);
-            setSearchResults(filteredData);
-        }
-    }, [apiData, choosedBodyPart, searchValue]);
+    useFilterData(apiData, choosedBodyPart, searchValue, setSearchResults);
 
 
     const handleClickOnSearch = (choosedValue: ChoosedExercise) => {
@@ -61,15 +44,16 @@ export const SearchResults: FC<Props> = ({ isFocused, setIsFocused, choosedExerc
         setChoosedExercise(choosedValue);
     }
 
+    useClickOutside(boxRef, () => setIsFocused(false), isFocused);
 
 
     return (
         isFocused ? (
-            <Box border='1px solid #B8B6B6' borderTop={0} borderRadius='0px 0px 5px 5px' px={4} py={2} overflowY="auto" maxHeight="300px">
+            <Box ref={boxRef} tabIndex={0} onBlur={() => setIsFocused(false)} border='1px solid #B8B6B6' borderTop={0} borderRadius='0px 0px 5px 5px' px={4} py={2} overflowY="auto" maxHeight="300px">
                 <List>
                     {searchResults.map((exercise, index) => (
-                        <ListItem key={index} onClick={() => handleClickOnSearch({ id: exercise.id, exerciseName: exercise.name, bodyPart: exercise.bodyPart })}>
-                            <Text>{exercise.name}</Text>
+                        <ListItem key={index} onClick={() => handleClickOnSearch({ id: exercise.id.toString(), exerciseName: exercise.name, bodyPart: exercise.bodyPart })}>
+                            <Text>{capitalizeFirstLetter(exercise.name)}</Text>
                         </ListItem>
                     ))}
                 </List>
