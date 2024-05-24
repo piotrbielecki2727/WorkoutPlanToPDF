@@ -27,7 +27,6 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
     return (
         <>
             <form>
-
                 <FormControl py={2} isInvalid={!!validationErrors.NameError}>
                     <FormLabel>Search for exercise: </FormLabel>
                     <BodyPartFiltering apiData={apiData} choosedBodyPart={choosedBodyPart} setChoosedBodyPart={setChoosedBodyPart} />
@@ -51,7 +50,7 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
                     <FormErrorMessage>{validationErrors.NameError}</FormErrorMessage>
                 </FormControl>
 
-                <FormControl py={2} >
+                <FormControl py={2} isInvalid={!!validationErrors.SetsError} >
                     <FormLabel>Sets: </FormLabel>
                     <NumberInput min={1} defaultValue={1} name="Sets" onChange={(name, valueAsNumber) => onSetChange('Sets', valueAsNumber)} value={exercise.Sets.Sets}>
                         <NumberInputField />
@@ -60,10 +59,12 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
                             <NumberDecrementStepper />
                         </NumberInputStepper>
                     </NumberInput>
+                    <FormErrorMessage>{validationErrors.SetsError}</FormErrorMessage>
+
                 </FormControl>
 
 
-                <FormControl py={2} >
+                <FormControl py={2} isInvalid={!!validationErrors.RepsError} >
                     <FormLabel>Reps: </FormLabel>
                     <NumberInput defaultValue={5} min={1} max={150} name="Reps" onChange={(name, valueAsNumber) => onSetChange('Reps', valueAsNumber)} value={exercise.Sets.Reps}>
                         <NumberInputField />
@@ -72,6 +73,8 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
                             <NumberDecrementStepper />
                         </NumberInputStepper>
                     </NumberInput>
+                    <FormErrorMessage>{validationErrors.RepsError}</FormErrorMessage>
+
                 </FormControl>
 
                 <FormControl py={2} >
@@ -83,6 +86,7 @@ export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedE
                             <NumberDecrementStepper />
                         </NumberInputStepper>
                     </NumberInput>
+
                 </FormControl>
 
                 <FormControl py={2} >

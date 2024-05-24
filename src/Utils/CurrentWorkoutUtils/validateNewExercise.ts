@@ -1,13 +1,24 @@
-import { ChoosedExercise, Exercise, ExerciseErrors } from "../../Types"
+import { ChoosedExercise, Exercise, ExerciseErrors, WorkoutPlan } from "../../Types"
+import { checkIfExerciseIsInWorkout } from "./checkIfExerciseIsInWorkout";
 
-export const validateNewExercise = (exercise: Exercise): ExerciseErrors | null => {
+export const validateNewExercise = (exercise: Exercise, workoutPlan: WorkoutPlan, exerciseId: number): ExerciseErrors | null => {
 
-    const errors: ExerciseErrors = {
+
+    const errors = {
         NameError: '',
-        MuscleError: '',
+        SetsError: '',
+        RepsError: '',
+    };
+
+
+
+    const checkIfExerciseExist = checkIfExerciseIsInWorkout(workoutPlan, exerciseId)
+
+    if (checkIfExerciseExist) {
+        errors.NameError = checkIfExerciseExist;
     }
 
-    if (!exercise.Name.trim()) {
+    else if (!exercise.Name.trim()) {
         errors.NameError = "Name of exercise cannot be empty!"
     }
     else if (exercise.Name.length > 40) {
@@ -17,15 +28,14 @@ export const validateNewExercise = (exercise: Exercise): ExerciseErrors | null =
         errors.NameError = "Name of exercise cannot be shorter than 3!"
     }
 
-    if (!exercise.Muscle.trim()) {
-        errors.MuscleError = "Muscle field cannot be empty!"
+    if (exercise.Sets.Sets < 1) {
+        errors.SetsError = "Sets field cannot be shorter than 1!"
     }
-    else if (exercise.Muscle.length > 30) {
-        errors.MuscleError = "Muscle field cannot be longer than 30!"
+
+    if (exercise.Sets.Reps < 1) {
+        errors.RepsError = "Reps field cannot be shorter than 1!"
     }
-    else if (exercise.Muscle.length < 3) {
-        errors.MuscleError = "Muscle field cannot be shorter than 3!"
-    }
+
 
     const errorsExist = Object.values(errors).some(error => error !== '')
 

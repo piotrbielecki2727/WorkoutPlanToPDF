@@ -35,7 +35,8 @@ export type Errors = {
 
 export type ExerciseErrors = {
     NameError: string;
-    MuscleError: string,
+    SetsError: string,
+    RepsError: string
 }
 
 export type WorkoutErrors = {

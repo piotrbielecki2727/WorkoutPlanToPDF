@@ -5,10 +5,7 @@ import { WorkoutPlan, WorkoutPlanStatesTypes } from "../../Types";
 export const checkIfExerciseIsInWorkout = (workoutPlan: WorkoutPlan, exerciseId: number) => {
 
 
-    const errors = {
-        NameError: '',
-        MuscleError: '',
-    };
+    let nameError = '';
 
 
     const exerciseExists = workoutPlan.Workouts.some(workout =>
@@ -17,8 +14,8 @@ export const checkIfExerciseIsInWorkout = (workoutPlan: WorkoutPlan, exerciseId:
 
 
     if (exerciseExists) {
-        errors.NameError = 'This exercise is already in this workout!';
-        return errors;
+        nameError = 'This exercise is already in this workout!';
+        return nameError;
     }
 
     return null;

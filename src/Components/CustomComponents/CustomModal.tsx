@@ -31,7 +31,7 @@ export const CustomModal: FC<Props> = ({ buttonType, maxModalW, border, h, size,
             {buttonType}
             <Modal closeOnOverlayClick={false} isCentered size={size} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay bg='rgba(11, 255, 0,0.1)' backdropFilter='blur(10px) hue-rotate(30deg)' />
-                <ModalContent maxW={maxModalW} border={border} maxH='100%' color='white' borderRadius={10} h={h}>
+                <ModalContent maxW={maxModalW} border={border}  color='white' borderRadius={10} h={h}>
                     <ModalHeader fontWeight={100} borderRadius='10px 10px 0px 0px' color='white' bg='black'>
                         {HeaderText}
                     </ModalHeader>

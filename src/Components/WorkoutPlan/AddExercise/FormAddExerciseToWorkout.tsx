@@ -37,11 +37,16 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
 
     const [errors, setErrors] = useState<ExerciseErrors>({
         NameError: '',
-        MuscleError: '',
+        SetsError: '',
+        RepsError: '',
     });
 
     useEffect(() => {
         if (choosedExercise) {
+            setErrors(prevErrors => ({
+                ...prevErrors,
+                NameError: '',
+            }));
             setExercise({
                 ...exercise,
                 Id: parseInt(choosedExercise.id),
@@ -64,15 +69,14 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
     };
 
     const handleSubmitForm = () => {
-        const validationErrors = validateNewExercise(exercise);
+        const validationErrors = validateNewExercise(exercise, workoutPlan, exercise.Id);
+        console.log(validationErrors);
         if (validationErrors) {
             setErrors(validationErrors);
+            return;
         }
-        const checkIfExerciseExist = checkIfExerciseIsInWorkout(workoutPlan, exercise.Id);
-        if(checkIfExerciseExist) 
-            setErrors(checkIfExerciseExist);
         else {
-            setErrors({ NameError: '', MuscleError: '' });
+            setErrors({ NameError: '', SetsError: '', RepsError: '' });
             const updatedWorkoutList = workoutPlan.Workouts.map((w) => {
                 if (w.Id === currentWorkout?.Id) {
                     return {
