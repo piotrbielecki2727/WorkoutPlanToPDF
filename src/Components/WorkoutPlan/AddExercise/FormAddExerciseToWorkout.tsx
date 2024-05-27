@@ -11,12 +11,14 @@ import { checkIfExerciseIsInWorkout } from "../../../Utils/CurrentWorkoutUtils/c
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
+    isEditing?: boolean,
+    editingExerciseId?: number,
 
 };
 
 
 
-export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkoutPlan, workoutPlan }) => {
+export const FormAddExerciseToWorkout: FC<Props> = ({editingExerciseId, onCloseModal, updateWorkoutPlan, workoutPlan }) => {
     const dispatch = useDispatch();
     const workoutPlanStates = useWorkoutPlanStatesSelector();
     const currentWorkout = findWorkout(workoutPlanStates.CurrentWorkoutId, workoutPlan);
@@ -70,7 +72,6 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
 
     const handleSubmitForm = () => {
         const validationErrors = validateNewExercise(exercise, workoutPlan, exercise.Id);
-        console.log(validationErrors);
         if (validationErrors) {
             setErrors(validationErrors);
             return;
@@ -103,6 +104,7 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ onCloseModal, updateWorkou
             validationErrors={errors}
             choosedExercise={choosedExercise}
             setChoosedExercise={setChoosedExercise}
+            editingExerciseId={editingExerciseId}
         />
 
     )

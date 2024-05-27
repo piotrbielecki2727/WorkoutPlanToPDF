@@ -6,6 +6,9 @@ import { FaPlus } from 'react-icons/fa';
 import { BodyPartFiltering } from './BodyPartFiltering';
 import { SearchResults } from './SearchResults';
 import { capitalizeFirstLetter } from '../../../Utils/CurrentWorkoutUtils/capitalizeFirstLetter';
+import { getDataExerciseToEdit } from '../../../Utils/CurrentWorkoutUtils/getDataExerciseToEdit';
+import { useWorkoutPlanSelector } from '../../../Hooks/useWorkoutPlanSelector';
+import { useWorkoutPlanStatesSelector } from '../../../Hooks/useWorkoutPlanStatesSelector';
 
 interface Props {
     exercise: Exercise;
@@ -14,15 +17,24 @@ interface Props {
     validationErrors: ExerciseErrors,
     choosedExercise: ChoosedExercise | undefined,
     setChoosedExercise: React.Dispatch<React.SetStateAction<ChoosedExercise | undefined>>;
+    isEditing?: boolean,
+    editingExerciseId?: number,
 }
 
-export const DisplayAddExerciseForm: FC<Props> = ({ choosedExercise, setChoosedExercise, validationErrors, onFormSubmit, exercise, onSetChange }) => {
+export const DisplayAddExerciseForm: FC<Props> = ({ editingExerciseId, isEditing, choosedExercise, setChoosedExercise, validationErrors, onFormSubmit, exercise, onSetChange }) => {
 
     const [choosedBodyPart, setChoosedBodyPart] = useState<string>('');
     const [apiData, setApiData] = useState<any[]>([]);
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>('');
+    const workoutPlan = useWorkoutPlanSelector();
+    const workoutPlanStates = useWorkoutPlanStatesSelector();
 
+    if (editingExerciseId) {
+        const editingExerciseData = getDataExerciseToEdit(editingExerciseId, workoutPlan, workoutPlanStates);
+        console.log(editingExerciseData?.Id);
+
+    }
 
     return (
         <>

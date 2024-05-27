@@ -28,7 +28,6 @@ export const WorkoutForm: FC<Props> = ({ ActualWorkoutName, ActualWorkoutId, isE
         NameError: ''
     });
 
-
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setWorkoutName(event.target.value);
         if (isEditing) {

@@ -1,16 +1,16 @@
 type ModalOpenState = { [key: number]: boolean };
 
 
-export const openModal = (workoutId: number, setModalOpenState: React.Dispatch<React.SetStateAction<ModalOpenState>>) => {
+export const openModal = (id: number, setModalOpenState: React.Dispatch<React.SetStateAction<ModalOpenState>>) => {
     setModalOpenState(prevState => ({
         ...prevState,
-        [workoutId]: true
+        [id]: true
     }));
 };
 
-export const closeModal = (workoutId: number, setModalOpenState: React.Dispatch<React.SetStateAction<ModalOpenState>>) => {
+export const closeModal = (id: number, setModalOpenState: React.Dispatch<React.SetStateAction<ModalOpenState>>) => {
     setModalOpenState(prevState => ({
         ...prevState,
-        [workoutId]: false
+        [id]: false
     }));
 };

@@ -16,7 +16,7 @@ export const AddExerciseToWorkoutModal = () => {
     return (
         <Box display='flex' justifyContent='center' alignItems='center'>
             <CustomModal
-                ModalBodyContent={<FormAddExerciseToWorkout onCloseModal={() => handleCloseModal(setIsModalOpen)} />}
+                ModalBodyContent={<FormAddExerciseToWorkout isEditing onCloseModal={() => handleCloseModal(setIsModalOpen)} />}
                 isOpen={isModalOpen}
                 onClose={() => handleCloseModal(setIsModalOpen)}
                 HeaderText='Enter exercise details'
