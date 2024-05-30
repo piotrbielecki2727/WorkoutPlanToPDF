@@ -8,6 +8,7 @@ import { DisplayAddExerciseForm } from "./DisplayAddExerciseForm";
 import { ChoosedExercise, Exercise, ExerciseErrors } from "../../../Types";
 import { validateNewExercise } from "../../../Utils/CurrentWorkoutUtils/validateNewExercise";
 import { checkIfExerciseIsInWorkout } from "../../../Utils/CurrentWorkoutUtils/checkIfExerciseIsInWorkout";
+import { getDataExerciseToEdit } from "../../../Utils/CurrentWorkoutUtils/getDataExerciseToEdit";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
@@ -18,11 +19,12 @@ interface Props extends PropsFromRedux {
 
 
 
-export const FormAddExerciseToWorkout: FC<Props> = ({editingExerciseId, onCloseModal, updateWorkoutPlan, workoutPlan }) => {
+export const FormAddExerciseToWorkout: FC<Props> = ({ editingExerciseId, onCloseModal, updateWorkoutPlan, workoutPlan }) => {
     const dispatch = useDispatch();
     const workoutPlanStates = useWorkoutPlanStatesSelector();
     const currentWorkout = findWorkout(workoutPlanStates.CurrentWorkoutId, workoutPlan);
     const [choosedExercise, setChoosedExercise] = useState<ChoosedExercise>();
+    const [editedData, setEditedData] = useState<Exercise>();
 
     const [exercise, setExercise] = useState<Exercise>({
         Id: 0,
@@ -44,21 +46,35 @@ export const FormAddExerciseToWorkout: FC<Props> = ({editingExerciseId, onCloseM
     });
 
     useEffect(() => {
+        if (editingExerciseId) {
+            const editingExerciseData = getDataExerciseToEdit(editingExerciseId, workoutPlan, workoutPlanStates);
+            if (editingExerciseData) {
+                setEditedData(editingExerciseData);
+                setExercise(editingExerciseData);
+                setChoosedExercise({
+                    id: editingExerciseData.Id.toString(),
+                    exerciseName: editingExerciseData.Name,
+                    bodyPart: editingExerciseData.Muscle,
+                });
+            }
+        }
+    }, [editingExerciseId, workoutPlan, workoutPlanStates]);
+
+    useEffect(() => {
         if (choosedExercise) {
             setErrors(prevErrors => ({
                 ...prevErrors,
                 NameError: '',
             }));
-            setExercise({
-                ...exercise,
+
+            setExercise(prevExercise => ({
+                ...prevExercise,
                 Id: parseInt(choosedExercise.id),
                 Name: choosedExercise.exerciseName,
                 Muscle: choosedExercise.bodyPart,
-            });
+            }));
         }
-    }, [choosedExercise])
-
-
+    }, [choosedExercise]);
 
     const handleInputSetChange = (name: string, valueAsNumber: number) => {
         setExercise(prevExercise => ({
@@ -71,29 +87,47 @@ export const FormAddExerciseToWorkout: FC<Props> = ({editingExerciseId, onCloseM
     };
 
     const handleSubmitForm = () => {
+        console.log(exercise);
         const validationErrors = validateNewExercise(exercise, workoutPlan, exercise.Id);
         if (validationErrors) {
             setErrors(validationErrors);
             return;
-        }
-        else {
+        } else {
             setErrors({ NameError: '', SetsError: '', RepsError: '' });
-            const updatedWorkoutList = workoutPlan.Workouts.map((w) => {
-                if (w.Id === currentWorkout?.Id) {
-                    return {
-                        ...w,
-                        Exercises: [...w.Exercises, exercise],
-                    };
-                }
-                return w;
-            });
+            let updatedWorkoutList;
+
+            if (editingExerciseId) {
+                updatedWorkoutList = workoutPlan.Workouts.map((w) => {
+                    if (w.Id === currentWorkout?.Id) {
+                        const updatedExercises = w.Exercises.map((ex) => 
+                            ex.Id === editingExerciseId ? exercise : ex
+                        );
+                        return {
+                            ...w,
+                            Exercises: updatedExercises,
+                        };
+                    }
+                    return w;
+                });
+            } else {
+                updatedWorkoutList = workoutPlan.Workouts.map((w) => {
+                    if (w.Id === currentWorkout?.Id) {
+                        return {
+                            ...w,
+                            Exercises: [...w.Exercises, exercise],
+                        };
+                    }
+                    return w;
+                });
+            }
+
             dispatch(updateWorkoutPlan({
                 ...workoutPlan,
                 Workouts: updatedWorkoutList,
             }));
             onCloseModal();
         }
-    }
+    };
 
 
     return (
@@ -105,6 +139,7 @@ export const FormAddExerciseToWorkout: FC<Props> = ({editingExerciseId, onCloseM
             choosedExercise={choosedExercise}
             setChoosedExercise={setChoosedExercise}
             editingExerciseId={editingExerciseId}
+            editedData={editedData}
         />
 
     )
