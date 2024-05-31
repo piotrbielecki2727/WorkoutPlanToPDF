@@ -1,7 +1,7 @@
 import { ChoosedExercise, Exercise, ExerciseErrors, WorkoutPlan } from "../../Types"
 import { checkIfExerciseIsInWorkout } from "./checkIfExerciseIsInWorkout";
 
-export const validateNewExercise = (exercise: Exercise, workoutPlan: WorkoutPlan, exerciseId: number): ExerciseErrors | null => {
+export const validateNewExercise = (exercise: Exercise, workoutPlan: WorkoutPlan, exerciseId: number, editingExerciseId: number | undefined): ExerciseErrors | null => {
 
 
     const errors = {
@@ -12,7 +12,8 @@ export const validateNewExercise = (exercise: Exercise, workoutPlan: WorkoutPlan
 
 
 
-    const checkIfExerciseExist = checkIfExerciseIsInWorkout(workoutPlan, exerciseId)
+    const checkIfExerciseExist = checkIfExerciseIsInWorkout(workoutPlan, exerciseId, editingExerciseId)
+
 
     if (checkIfExerciseExist) {
         errors.NameError = checkIfExerciseExist;

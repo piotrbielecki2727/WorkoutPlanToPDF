@@ -9,6 +9,7 @@ import { ChoosedExercise, Exercise, ExerciseErrors } from "../../../Types";
 import { validateNewExercise } from "../../../Utils/CurrentWorkoutUtils/validateNewExercise";
 import { checkIfExerciseIsInWorkout } from "../../../Utils/CurrentWorkoutUtils/checkIfExerciseIsInWorkout";
 import { getDataExerciseToEdit } from "../../../Utils/CurrentWorkoutUtils/getDataExerciseToEdit";
+import { updateExerciseList } from "../../../Utils/CurrentWorkoutUtils/updateExerciseList";
 
 interface Props extends PropsFromRedux {
     onCloseModal: () => void;
@@ -16,8 +17,6 @@ interface Props extends PropsFromRedux {
     editingExerciseId?: number,
 
 };
-
-
 
 export const FormAddExerciseToWorkout: FC<Props> = ({ editingExerciseId, onCloseModal, updateWorkoutPlan, workoutPlan }) => {
     const dispatch = useDispatch();
@@ -27,22 +26,17 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ editingExerciseId, onClose
     const [editedData, setEditedData] = useState<Exercise>();
 
     const [exercise, setExercise] = useState<Exercise>({
-        Id: 0,
-        Name: '',
-        Muscle: '',
+        Id: 0, Name: '', Muscle: '',
         Sets: {
             Sets: 0,
             Reps: 0,
             Weight: 0,
             Rest: 0,
-
         }
     })
 
     const [errors, setErrors] = useState<ExerciseErrors>({
-        NameError: '',
-        SetsError: '',
-        RepsError: '',
+        NameError: '', SetsError: '', RepsError: '',
     });
 
     useEffect(() => {
@@ -58,7 +52,7 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ editingExerciseId, onClose
                 });
             }
         }
-    }, [editingExerciseId, workoutPlan, workoutPlanStates]);
+    }, [editingExerciseId]);
 
     useEffect(() => {
         if (choosedExercise) {
@@ -66,7 +60,6 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ editingExerciseId, onClose
                 ...prevErrors,
                 NameError: '',
             }));
-
             setExercise(prevExercise => ({
                 ...prevExercise,
                 Id: parseInt(choosedExercise.id),
@@ -87,43 +80,16 @@ export const FormAddExerciseToWorkout: FC<Props> = ({ editingExerciseId, onClose
     };
 
     const handleSubmitForm = () => {
-        console.log(exercise);
-        const validationErrors = validateNewExercise(exercise, workoutPlan, exercise.Id);
+        const validationErrors = validateNewExercise(exercise, workoutPlan, exercise.Id, editingExerciseId);
         if (validationErrors) {
             setErrors(validationErrors);
             return;
         } else {
             setErrors({ NameError: '', SetsError: '', RepsError: '' });
-            let updatedWorkoutList;
-
-            if (editingExerciseId) {
-                updatedWorkoutList = workoutPlan.Workouts.map((w) => {
-                    if (w.Id === currentWorkout?.Id) {
-                        const updatedExercises = w.Exercises.map((ex) => 
-                            ex.Id === editingExerciseId ? exercise : ex
-                        );
-                        return {
-                            ...w,
-                            Exercises: updatedExercises,
-                        };
-                    }
-                    return w;
-                });
-            } else {
-                updatedWorkoutList = workoutPlan.Workouts.map((w) => {
-                    if (w.Id === currentWorkout?.Id) {
-                        return {
-                            ...w,
-                            Exercises: [...w.Exercises, exercise],
-                        };
-                    }
-                    return w;
-                });
-            }
-
+            const updatedExerciseList = updateExerciseList(workoutPlan, exercise, editingExerciseId, currentWorkout);
             dispatch(updateWorkoutPlan({
                 ...workoutPlan,
-                Workouts: updatedWorkoutList,
+                Workouts: updatedExerciseList,
             }));
             onCloseModal();
         }

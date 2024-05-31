@@ -19,7 +19,7 @@ export const AddExerciseToWorkoutModal = () => {
                 ModalBodyContent={<FormAddExerciseToWorkout isEditing onCloseModal={() => handleCloseModal(setIsModalOpen)} />}
                 isOpen={isModalOpen}
                 onClose={() => handleCloseModal(setIsModalOpen)}
-                HeaderText='Enter exercise details'
+                HeaderText='Enter exercise details...'
                 buttonType={<CustomButton mt={5} buttonText='Add new exercise' leftIcon={FaPlus} onClick={() => handleOpenModal(setIsModalOpen)} />}
 
             />

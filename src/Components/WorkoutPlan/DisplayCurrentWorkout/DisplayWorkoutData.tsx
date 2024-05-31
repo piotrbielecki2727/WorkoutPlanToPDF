@@ -38,7 +38,7 @@ export const DisplayWorkoutData: FC<Props> = ({ currentWorkout, dispatch }) => {
                                 isOpen={modalOpenState[exercise.Id] || false}
                                 onClose={() => closeModal(exercise.Id, setModalOpenState)}
                                 ModalBodyContent={<FormAddExerciseToWorkout editingExerciseId={exercise.Id} onCloseModal={() => closeModal(exercise.Id, setModalOpenState)} />}
-                                HeaderText='Enter workout plan details...'
+                                HeaderText='Provide data for editing...'
                                 buttonType={<CustomIconButton fontSize={22} icon={<FaEdit />} aria_label="editExerciseButton" onClick={() => openModal(exercise.Id, setModalOpenState)}  />}
 
                             />

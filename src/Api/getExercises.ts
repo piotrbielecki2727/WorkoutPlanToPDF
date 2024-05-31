@@ -39,6 +39,70 @@ export const getExercises = async (URL: string) => {
             name: "45° side bend",
             secondaryMuscles: ["obliques"],
             target: "abs"
+        },
+        {
+            bodyPart: "upper legs",
+            equipment: "body weight",
+            gifUrl: "https://v2.exercisedb.io/image/I-Of0Ev43i4Zt7",
+            id: 3,
+            instructions: [
+                "Stand with your feet shoulder-width apart and your arms extended straight down by your sides.",
+                "Keeping your back straight and your core engaged, bend to one side, lowering your hand towards your knee.",
+                "Pause for a moment at the bottom, then slowly return to the starting position.",
+                "Repeat on the other side.",
+                "Continue alternating sides for the desired number of repetitions."
+            ],
+            name: "squat",
+            secondaryMuscles: ["obliques"],
+            target: "abs"
+        },
+        {
+            bodyPart: "lower legs",
+            equipment: "body weight",
+            gifUrl: "https://v2.exercisedb.io/image/I-Of0Ev43i4Zt7",
+            id: 4,
+            instructions: [
+                "Stand with your feet shoulder-width apart and your arms extended straight down by your sides.",
+                "Keeping your back straight and your core engaged, bend to one side, lowering your hand towards your knee.",
+                "Pause for a moment at the bottom, then slowly return to the starting position.",
+                "Repeat on the other side.",
+                "Continue alternating sides for the desired number of repetitions."
+            ],
+            name: "lydki",
+            secondaryMuscles: ["obliques"],
+            target: "abs"
+        },
+        {
+            bodyPart: "shoulders",
+            equipment: "body weight",
+            gifUrl: "https://v2.exercisedb.io/image/I-Of0Ev43i4Zt7",
+            id: 5,
+            instructions: [
+                "Stand with your feet shoulder-width apart and your arms extended straight down by your sides.",
+                "Keeping your back straight and your core engaged, bend to one side, lowering your hand towards your knee.",
+                "Pause for a moment at the bottom, then slowly return to the starting position.",
+                "Repeat on the other side.",
+                "Continue alternating sides for the desired number of repetitions."
+            ],
+            name: "ohp",
+            secondaryMuscles: ["obliques"],
+            target: "abs"
+        },
+        {
+            bodyPart: "back",
+            equipment: "body weight",
+            gifUrl: "https://v2.exercisedb.io/image/I-Of0Ev43i4Zt7",
+            id: 6,
+            instructions: [
+                "Stand with your feet shoulder-width apart and your arms extended straight down by your sides.",
+                "Keeping your back straight and your core engaged, bend to one side, lowering your hand towards your knee.",
+                "Pause for a moment at the bottom, then slowly return to the starting position.",
+                "Repeat on the other side.",
+                "Continue alternating sides for the desired number of repetitions."
+            ],
+            name: "pull up",
+            secondaryMuscles: ["obliques"],
+            target: "abs"
         }
     ];
 

@@ -1,11 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
-import { ChoosedExercise, Exercise, ExerciseErrors } from '../../../Types';
+import { ChoosedExercise, Exercise, ExerciseErrors, FetchedExercise } from '../../../Types';
 import { FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, Box, SimpleGrid, Checkbox, CheckboxGroup, Stack, Button, Menu, MenuButton, MenuItem, MenuList, Grid, GridItem, Text } from '@chakra-ui/react';
 import { CustomButton } from '../../CustomComponents/CustomButton';
-import { FaPlus } from 'react-icons/fa';
+import { FaEdit, FaPlus } from 'react-icons/fa';
 import { BodyPartFiltering } from './BodyPartFiltering';
 import { SearchResults } from './SearchResults';
 import { capitalizeFirstLetter } from '../../../Utils/CurrentWorkoutUtils/capitalizeFirstLetter';
+import { DisplayChoosedExercise } from './DisplayChoosedExercise';
 
 
 interface Props {
@@ -22,10 +23,9 @@ interface Props {
 export const DisplayAddExerciseForm: FC<Props> = ({ editedData, editingExerciseId, choosedExercise, setChoosedExercise, validationErrors, onFormSubmit, exercise, onSetChange }) => {
 
     const [choosedBodyPart, setChoosedBodyPart] = useState<string>('');
-    const [apiData, setApiData] = useState<any[]>([]);
+    const [apiData, setApiData] = useState<FetchedExercise[]>([]);
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>('');
-
 
     return (
         <>
@@ -45,6 +45,9 @@ export const DisplayAddExerciseForm: FC<Props> = ({ editedData, editingExerciseI
                         onChange={(e) => setSearchValue(e.target.value)}
                         minLength={5}
                     />
+                    {!choosedExercise &&
+                        <FormErrorMessage>{validationErrors.NameError}</FormErrorMessage>
+                    }
                     <SearchResults
                         choosedExercise={choosedExercise}
                         setChoosedExercise={setChoosedExercise}
@@ -55,31 +58,9 @@ export const DisplayAddExerciseForm: FC<Props> = ({ editedData, editingExerciseI
                         isFocused={isFocused}
                         setIsFocused={setIsFocused}
                     />
-                    {!editedData && choosedExercise && (
-                        <>
-                            <Text py={2}>Choosed Exercise:</Text>
-                            <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>
-                                {capitalizeFirstLetter(choosedExercise.exerciseName)}
-                            </Box>
-                            <Text py={2}>Target muscle:</Text>
-                            <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>
-                                {capitalizeFirstLetter(choosedExercise.bodyPart)}
-                            </Box>
-                        </>
-                    )}
-                    {editedData && (
-                        <>
-                            <Text py={2}>Choosed Exercise:</Text>
-                            <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>
-                                {capitalizeFirstLetter(choosedExercise ? choosedExercise.exerciseName : editedData.Name)}
-                            </Box>
-                            <Text py={2}>Target muscle:</Text>
-                            <Box px={4} py={2} borderRadius={5} border='1px solid #b8b6b6'>
-                                {capitalizeFirstLetter(choosedExercise ? choosedExercise.bodyPart : editedData.Muscle)}
-                            </Box>
-                        </>
-                    )}
-                    <FormErrorMessage>{validationErrors.NameError}</FormErrorMessage>
+                    {(choosedExercise || editedData) &&
+                        <DisplayChoosedExercise error={validationErrors.NameError} choosedExercise={choosedExercise} editedData={editedData} />
+                    }
                 </FormControl>
 
                 <FormControl py={2} isInvalid={!!validationErrors.SetsError}>
