@@ -1,4 +1,4 @@
-# WorkoutPlanner
+# WorkoutPlanner (Work still in progress)
 The "WorkoutPlanner" is a web application designed to help users create personalized workout plans and generate PDF documents from them. Users can select exercises, specify sets and reps, and organize them into custom workout routines. 
 
 # Features
@@ -12,3 +12,13 @@ The "WorkoutPlanner" is a web application designed to help users create personal
 * Frontend: Typescript, React, Chakra UI, Redux toolkit
 * PDF Generation: PDFKit
 
+# Preview
+![](/src/Assets/ReadMeSS/startPage.png)
+
+![](/src/Assets/ReadMeSS/mainBoard.png)
+
+![](/src/Assets/ReadMeSS/addingExerciseForm.png)
+
+![](/src/Assets/ReadMeSS/tabletView.png)
+
+![](/src/Assets/ReadMeSS/iphone14View.png)
