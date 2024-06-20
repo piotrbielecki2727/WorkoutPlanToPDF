@@ -6,6 +6,7 @@ import { AddExerciseToWorkoutModal } from "./AddExercise/AddExerciseToWorkoutMod
 import { DisplayWorkoutPlanHeader } from "./DisplayCurrentWorkout/DisplayWorkoutPlanHeader";
 import { DisplayWorkoutTable } from "./DisplayCurrentWorkout/DisplayWorkoutTable";
 import { useDispatch } from "react-redux";
+import { PDFDocument } from "../PDFGenerating/PDFDocument";
 
 
 
@@ -26,6 +27,7 @@ export const DisplayCurrentWorkout: FC = () => {
                 <>
                     <DisplayWorkoutTable currentWorkout={currentWorkout} workoutPlan={workoutPlan} dispatch={dispatch} />
                     <AddExerciseToWorkoutModal />
+                    <PDFDocument />
 
                 </>
             )}
